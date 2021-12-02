@@ -44,10 +44,11 @@ class ObjectRepository {
         return regis;
     }
     async getPlaceWisata(params) {
-        const place = params.payload
-        const token = "B2xvKZXOoctOEJUBcGvIRIOxK9qvu8SGDJ1WC6Vqlx8"
+        var {place} = params
+        place = place.replace(" ", "+")
+        const token = "BYrIifYEk_cazqQRnTgSzrkZcrq7UyvsF4ZPGTgg0fQ"
             const reponse = await Repository.get(
-                `https://discover.search.hereapi.com/v1/discover?limit=1&q=${place}&apiKey=${token}`, 
+                `https://geocode.search.hereapi.com/v1/geocode?q=sudirman&apiKey=${token}`, 
                 // setHeader()
             )
                 .then(response => {

@@ -5,16 +5,26 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import { DashboardLayout } from "../Dashboard/shared/Layout";
 import objectRepository from "../../repositories/objectRepository";
+import { useState } from "react";
 
 export default function Map(){
-    const apiKey = "oIprb1nsk2AkGe1rBnRGDx4uGeWjywt2j9HvKVp02lc"
-  const onChange = (value) => {
-    // console.log(`selected ${value}`);
+    const [state,setstate] = useState({
+        lat:115.21793,
+        lng:-8.66908
+    })
+    const apiKey = "BYrIifYEk_cazqQRnTgSzrkZcrq7UyvsF4ZPGTgg0fQ"
+  const onChange = async(e) => {
+    const { value } = e.target;
     const payload = {
         place:value
     }
-    var res = objectRepository.getPlaceWisata(payload)
-    console.log(res)
+    var res = await objectRepository.getPlaceWisata(payload)
+    setstate(
+        prev=>({
+        ...prev,
+        ...res.items[0].position
+    }));
+    console.log({...res.items[0].position})
   };
 
   const onBlur = () => {
@@ -37,7 +47,7 @@ export default function Map(){
               <Form.Item label="">
                 <Input
                   size="large"
-                  onChange={async ()=>onChange}
+                  onChange={onChange}
                   placeholder="Search..."
                 />
               </Form.Item>
@@ -52,7 +62,7 @@ export default function Map(){
           </Row>
         </Form>
         <MapContainer
-        center={[37.773972, -122.431297]}
+        center={[state.lng, state.lat]}
         zoom={14}
         scrollWheelZoom={false}
         style={{ height: "100%", width: "100%" }}
@@ -61,7 +71,7 @@ export default function Map(){
           url={`https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/reduced.night/{z}/{x}/{y}/512/png8?apiKey=${apiKey}&ppi=320`}
           attribution='Map data &copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors, <a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/&quot;>CC-BY-SA</a>, Imagery &copy; <a href=&quot;https://www.mapbox.com/&quot;>Mapbox</a>'
         />
-        <Marker position={[37.773972, -122.431297]} draggable={true} animate={true}>
+        <Marker position={[state.lng, state.lat]} draggable={true} animate={true}>
           <Popup>Hey ! I live here</Popup>
         </Marker>
       </MapContainer>
