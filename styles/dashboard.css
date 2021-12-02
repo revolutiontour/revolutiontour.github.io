@@ -1,0 +1,129 @@
+#components-layout-demo-custom-trigger .trigger {
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  #components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+  }
+  
+  #components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .site-layout .site-layout-background {
+    background: #fff;
+  }
+
+  .sidebar-sub-menu ul,.ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark .ant-menu-sub{
+    background-color: #E88C30 !important;
+}
+.ant-menu-item.ant-menu-item-selected {
+  background-color: white !important;
+}
+.ant-menu-item.ant-menu-item-selected a,.ant-menu-item.ant-menu-item-selected .anticon{
+  color: #E88C30 !important;
+}
+li.sidebar-sub-menu .ant-menu-submenu-selected{
+  font-weight: bold;
+}
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected::after{
+  border-bottom: 2px solid #E88C30 !important;
+}
+.ant-tooltip-inner,.ant-tooltip-arrow-content{
+  background-color: #E88C30 !important;
+}
+.ant-tooltip-inner a{
+  color: white !important;
+}
+.ant-list-pagination{
+  text-align: center !important;
+}
+
+
+.menuBar {
+  padding: 0 20px;
+  border-bottom: solid 1px #e8e8e8;
+  box-shadow: 0 0 30px #f3f1f1;
+}
+
+.logo {
+  float: left;
+}
+
+.logo a {
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.menuCon .ant-menu-item {
+  padding: 0px 5px;
+}
+
+.menuCon .ant-menu-submenu-title {
+  padding: 10px 20px;
+}
+
+.menuCon .ant-menu-item a,
+.menuCon .ant-menu-submenu-title a {
+  padding: 10px 15px;
+}
+
+.menuCon .ant-menu-horizontal {
+  border-bottom: none;
+}
+
+.menuCon .leftMenu {
+  float: left;
+}
+
+.menuCon .rightMenu {
+  float: right;
+}
+
+.barsMenu {
+  float: right;
+  height: auto !important;
+  display: none !important;
+  background: none;
+}
+
+.ant-drawer-body {
+  padding: 0;
+}
+
+.barsMenu>span {
+  display: block;
+}
+
+.ant-drawer-body .ant-menu-horizontal>.ant-menu-item,
+.ant-drawer-body .ant-menu-horizontal>.ant-menu-submenu {
+  display: inline-block;
+  width: 100%;
+}
+
+.ant-drawer-body .ant-menu-horizontal {
+  border-bottom: none;
+}
+
+.ant-drawer-body .ant-menu-horizontal>.ant-menu-item:hover {
+  border-bottom-color: transparent;
+}
+
+@media (max-width: 767px) {
+  .barsMenu {
+    display: inline-block !important;
+  }
+
+  .leftMenu,
+  .rightMenu {
+    display: none !important;
+  }
+
+  .menuCon .ant-menu-item,
+  .menuCon .ant-menu-submenu-title {
+    padding: 1px 20px !important;
+  }
+}

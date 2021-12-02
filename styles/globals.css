@@ -1,0 +1,27 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+.ant-btn-primary,.ant-btn-primary:hover, .ant-btn-primary:focus {
+  border-color: #E88C30 !important;
+    background: #E88C30 !important;
+    box-shadow: 0 20px 25px -5px rgb(232 140 48 / 20%), 0 10px 10px -5px rgb(232 140 48 / 4%) !important;
+    text-shadow: none;
+}
+.ant-btn {
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  height: auto !important;
+}
