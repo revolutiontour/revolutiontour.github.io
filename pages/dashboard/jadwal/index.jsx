@@ -31,7 +31,7 @@ const Jadwal =(props) =>{
 
 
 
-export const getStaticProps = wrapper.getStaticProps( store =>
+export const getServerSideProps = wrapper.getServerSideProps( store =>
   async() => {
     store.dispatch(listSchedule())
     store.dispatch(END)

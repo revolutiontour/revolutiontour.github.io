@@ -22,7 +22,7 @@ export default function ObjekWisata() {
   );
 };
 
-export const getStaticProps = wrapper.getStaticProps( store =>
+export const getServerSideProps = wrapper.getServerSideProps( store =>
   async() => {
     store.dispatch(listObject())
     store.dispatch(END)

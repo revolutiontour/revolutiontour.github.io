@@ -32,7 +32,7 @@ export default function DashboardIndex(props) {
     </>
   );
 };
-export const getStaticProps = wrapper.getStaticProps(store =>
+export const getServerSideProps = wrapper.getServerSideProps(store =>
   async() => {
   if (!store.getState().member.participant) {
     store.dispatch(listParticipant())

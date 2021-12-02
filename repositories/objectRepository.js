@@ -43,6 +43,19 @@ class ObjectRepository {
             });
         return regis;
     }
+    async getPlaceWisata(params) {
+        const place = params.payload
+        const token = "B2xvKZXOoctOEJUBcGvIRIOxK9qvu8SGDJ1WC6Vqlx8"
+            const reponse = await Repository.get(
+                `https://discover.search.hereapi.com/v1/discover?limit=1&q=${place}&apiKey=${token}`, 
+                // setHeader()
+            )
+                .then(response => {
+                    return response.data;
+                })
+                .catch(error => ({ error: JSON.stringify(error) }));
+            return reponse;
+        }
 }
 
 export default new ObjectRepository

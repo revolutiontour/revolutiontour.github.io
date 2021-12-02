@@ -1,11 +1,56 @@
+import { Select, Form,Input,Button, Row, Col, DatePicker  } from "antd";
 import { MapContainer, TileLayer,Marker,Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
 import "leaflet-defaulticon-compatibility";
+import { DashboardLayout } from "../Dashboard/shared/Layout";
+import objectRepository from "../../repositories/objectRepository";
 
 export default function Map(){
     const apiKey = "oIprb1nsk2AkGe1rBnRGDx4uGeWjywt2j9HvKVp02lc"
+  const onChange = (value) => {
+    // console.log(`selected ${value}`);
+    const payload = {
+        place:value
+    }
+    var res = objectRepository.getPlaceWisata(payload)
+    console.log(res)
+  };
+
+  const onBlur = () => {
+    console.log("blur");
+  };
+
+  const onFocus = () => {
+    console.log("focus");
+  };
+
+  const onSearch = (val) => {
+    console.log("search:", val);
+  };
     return(
+        <>
+        <DashboardLayout>
+        <Form layout="horizontal" className="mb-3">
+          <Row>
+            <Col className="align-self-center" span={22}>
+              <Form.Item label="">
+                <Input
+                  size="large"
+                  onChange={async ()=>onChange}
+                  placeholder="Search..."
+                />
+              </Form.Item>
+            </Col>
+            <Col span={2}>
+              <Form.Item label=" " className="ml-3" colon={false}>
+                <Button type="primary" htmlType="submit">
+                  Cari
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
         <MapContainer
         center={[37.773972, -122.431297]}
         zoom={14}
@@ -20,5 +65,7 @@ export default function Map(){
           <Popup>Hey ! I live here</Popup>
         </Marker>
       </MapContainer>
+        </DashboardLayout>
+      </>
     );
 }
