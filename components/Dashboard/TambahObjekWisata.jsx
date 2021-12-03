@@ -55,7 +55,7 @@ export const TambahObjekWisata = () => {
           </Form.Item>
           <Form.Item label="Lokasi Objek Destinasi">
           <Link href="/dashboard/objek-wisata/map">
-          <Button>{data?"x "+data.title:"+ Klik disini"}</Button>
+          <Button danger={data?true:false}>{data?"x "+data.title:"+ Pilih lokasi"}</Button>
         </Link>
           {/* <Input placeholder="Masukkan lokasi objek destinasi disini..." /> */}
           </Form.Item>
