@@ -6,7 +6,7 @@ class ScheduleRepository {
     }
     
     async registTourSchedule(params) {
-        const reponse = await Repository.get(
+        const reponse = await Repository.post(
             `${tourifyUrl}/schedule/tour-schedule`, 
             params
             // setHeader()

@@ -9,7 +9,7 @@ export default function DashboardIndex() {
     <>
       <Head>
         <title>Create Next App</title>
-        <meta name="description" content="Kelompok 2 de bes ngab" />
+        <meta name="description" content="Dashboard | Tourify" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <DashboardLanding />

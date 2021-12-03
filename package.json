@@ -12,6 +12,7 @@
     "antd": "^4.16.13",
     "axios": "^0.24.0",
     "bootstrap": "^4.6.1",
+    "firebase": "^8.3.1",
     "leaflet": "^1.7.1",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "leaflet-geosearch": "^3.6.0",

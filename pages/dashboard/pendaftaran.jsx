@@ -22,7 +22,7 @@ export default function DashboardIndex() {
     <>
       <Head>
         <title>Pendaftaran</title>
-        <meta name="description" content="Kelompok 2 de bes ngab" />
+        <meta name="description" content="Register | Tourify" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <DashboardPendaftaran data={data} />

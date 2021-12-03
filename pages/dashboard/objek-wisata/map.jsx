@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useSelector } from "react-redux";
 import dynamic from "next/dynamic"
 const MyAwesomeMap = dynamic(() => import("../../../components/Map"), { ssr:false })
+// import MyAwesomeMap from "../../../components/Map"
 
 export default function ObjekWisata() {
   return (

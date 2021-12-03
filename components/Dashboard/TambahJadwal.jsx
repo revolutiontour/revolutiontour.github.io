@@ -3,8 +3,17 @@ import { DashboardLayout } from "./shared/Layout";
 import { Select, Form,Input,Button, Row, Col, DatePicker, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 React.useLayoutEffect = React.useEffect;
+import storage from "./utils/firebase"
+import { useDispatch } from "react-redux";
+import { registTourSchedule } from "../../store/actions/schedule";
 
 export const TambahJadwal = ({data}) => {
+  const dispatch = useDispatch()
+  const [state,setstate]= useState(
+    {
+      downloadurl:null
+    }
+  )
   const { Option } = Select;
   const onChange = (value) => {
     console.log(`selected ${value}`);
@@ -36,13 +45,48 @@ export const TambahJadwal = ({data}) => {
   // Image Handling
 
   const onImageChange = ({ file: newFile }) => {
-    var list = {};
+    // var list = {};
     if (newFile.status === "removed") {
-      list["image"] = "";
+      // list["image"] = "";
     } else if (newFile.status === "done") {
-      list["image"] = newFile;
+      // list["image"] = newFile;
+      storage.ref(`/images/${newFile.name}`).put(newFile)
+  .on("state_changed" , alert("success") , alert);
+  storage.ref(`/images/${newFile.name}`).getDownloadURL()
+  .then((url) => {
+    // Insert url into an <img> tag to "download"
+    setstate(
+      prev => (
+        {
+          ...prev,
+          downloadurl:url
+        }
+      )
+    )
+  })
+  .catch((error) => {
+    // A full list of error codes is available at
+    // https://firebase.google.com/docs/storage/web/handle-errors
+    switch (error.code) {
+      case 'storage/object-not-found':
+        // File doesn't exist
+        break;
+      case 'storage/unauthorized':
+        // User doesn't have permission to access the object
+        break;
+      case 'storage/canceled':
+        // User canceled the upload
+        break;
+  
+      // ...
+  
+      case 'storage/unknown':
+        // Unknown error occurred, inspect the server response
+        break;
     }
-    console.log(list)
+  });;
+    }
+    // console.log(list)
   };
 
   const dummyRequest = (props) => {
@@ -53,6 +97,7 @@ export const TambahJadwal = ({data}) => {
   };
 
   const onFinish = (params)=>{
+    const {downloadurl} = state 
     console.log(convertLong(params.startDate))
     var startDate = convertLong(params.startDate)
     var endDate = convertLong(params.endDate)
@@ -62,7 +107,12 @@ export const TambahJadwal = ({data}) => {
     formdata.append('endDate', `${endDate}`);
     formdata.append('objectId', `${params.objectId}`);
     formdata.append('leaderId', `${params.leaderId}`);
+    formdata.append('leaderId', `${params.leaderId}`);
+    formdata.append('rundownpath', `${downloadurl}`);
+    dispatch(registTourSchedule(formdata))
+
   }
+  console.log("download url :",state.downloadurl)
   return (
     <>
       <DashboardLayout>

@@ -92,9 +92,32 @@ function* registTourGroupScheduleSaga({payload}) {
         console.log(err);
     }
 }
+function* registTourScheduleSaga({payload}) {
+    console.log('regist Tour Schedule')
+    try {
+        const schedule = yield call(scheduleRepository.registTourSchedule,payload);
+        if (!schedule) {
+            modalFailed('error','');
+        } else {
+            console.log(schedule)
+            if (schedule.responseMessage==="SUCCESS") {
+                // yield put(registTourGroupScheduleSuccess(schedule.data));
+                modalSuccessRegis()
+                Router.push({
+                    pathname: '/dashboard',
+                });
+            } else {
+                modalFailed('error',schedule.responseMessage);
+            }
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 export default function* rootSaga() {
     yield all([takeEvery(actionTypes.LIST_SCHEDULE_REQUEST, listScheduleSaga)]);
     yield all([takeEvery(actionTypes.DETAIL_SCHEDULE_REQUEST, detailScheduleSaga)]);
     yield all([takeEvery(actionTypes.REGISTER_TOURGROUPSCHEDULE_REQUEST, registTourGroupScheduleSaga)]);
+    yield all([takeEvery(actionTypes.REGISTER_TOURSCHEDULE_REQUEST, registTourScheduleSaga)]);
 }
