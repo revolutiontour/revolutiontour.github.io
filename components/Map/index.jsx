@@ -67,6 +67,11 @@ export default function Map(){
         scrollWheelZoom={false}
         style={{ height: "100%", width: "100%" }}
       >
+        {
+          ()=>{
+            console.log(state.lng, state.lat)
+          }
+        }
         <TileLayer
           url={`https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/reduced.night/{z}/{x}/{y}/512/png8?apiKey=${apiKey}&ppi=320`}
           attribution='Map data &copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors, <a href=&quot;https://creativecommons.org/licenses/by-sa/2.0/&quot;>CC-BY-SA</a>, Imagery &copy; <a href=&quot;https://www.mapbox.com/&quot;>Mapbox</a>'

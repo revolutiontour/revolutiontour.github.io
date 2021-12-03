@@ -48,7 +48,7 @@ class ObjectRepository {
         place = place.replace(" ", "+")
         const token = "BYrIifYEk_cazqQRnTgSzrkZcrq7UyvsF4ZPGTgg0fQ"
             const reponse = await Repository.get(
-                `https://geocode.search.hereapi.com/v1/geocode?q=sudirman&apiKey=${token}`, 
+                `https://geocode.search.hereapi.com/v1/geocode?q=${place}&apiKey=${token}`, 
                 // setHeader()
             )
                 .then(response => {
