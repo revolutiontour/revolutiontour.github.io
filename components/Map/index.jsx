@@ -20,6 +20,8 @@ export default function Map() {
   const apiKey = "BYrIifYEk_cazqQRnTgSzrkZcrq7UyvsF4ZPGTgg0fQ"
   const onChange = async (e) => {
     const { value } = e.target;
+    if(value.length != 0 || value != "")
+    {
     const payload = {
       place: value
     }
@@ -28,9 +30,10 @@ export default function Map() {
     setstate(
       prev => ({
         ...prev,
-        ...res.items[0].position,
+        // ...res.items[0].position,
         items: res.items
       }));
+    }
   };
 
   const onBlur = () => {
@@ -84,7 +87,7 @@ export default function Map() {
           )}
         />
         <br />
-        <MapContainer
+        {/* <MapContainer
           center={[state.lat, state.lng]}
           zoom={14}
           scrollWheelZoom={false}
@@ -97,7 +100,7 @@ export default function Map() {
           <Marker position={[state.lat, state.lng]} draggable={true} animate={true}>
             <Popup>Hey ! I live here</Popup>
           </Marker>
-        </MapContainer>
+        </MapContainer> */}
       </DashboardLayout>
     </>
   );
