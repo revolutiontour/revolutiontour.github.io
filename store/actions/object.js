@@ -1,6 +1,8 @@
 export const actionTypes = {
       REGISTER_OBJECT_REQUEST:"REGISTER_OBJECT_REQUEST",
       REGISTER_OBJECT_SUCCESS:"REGISTER_OBJECT_SUCCESS",
+      REGISTER_MAP_OBJECT_REQUEST:"REGISTER_MAP_OBJECT_REQUEST",
+      REGISTER_MAP_OBJECT_SUCCESS:"REGISTER_MAP_OBJECT_SUCCESS",
       LIST_OBJECT_REQUEST:"LIST_OBJECT_REQUEST",
       LIST_OBJECT_SUCCESS:"LIST_OBJECT_SUCCESS",
       DETAIL_OBJECT_REQUEST:"DETAIL_OBJECT_REQUEST",
@@ -39,6 +41,18 @@ export const actionTypes = {
     export const registObjectSuccess = (data) => {
       return {
         type: actionTypes.REGISTER_OBJECT_SUCCESS,
+        payload: data,
+      };
+    };
+    export const registMapObject = (data) => {
+      return {
+        type: actionTypes.REGISTER_MAP_OBJECT_REQUEST,
+        payload: data,
+      };
+    };
+    export const registMapObjectSuccess = (data) => {
+      return {
+        type: actionTypes.REGISTER_MAP_OBJECT_SUCCESS,
         payload: data,
       };
     };

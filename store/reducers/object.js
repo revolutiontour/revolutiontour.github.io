@@ -2,7 +2,8 @@ import { actionTypes } from "../actions/object";
 import { HYDRATE } from "next-redux-wrapper";
 const initialState = {
   All: null,
-  Detail: null
+  Detail: null,
+  CurrentMap:null
 };
 
 const object = (state = initialState, action) => {
@@ -22,6 +23,11 @@ const object = (state = initialState, action) => {
           ...state, 
           ...{ Detail: payload } 
         };
+        case actionTypes.REGISTER_MAP_OBJECT_SUCCESS:
+          return { 
+              ...state, 
+              ...{ CurrentMap: payload } 
+            };
     default:
       return {
         ...state
