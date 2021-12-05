@@ -5,38 +5,49 @@ import {DetailJadwal} from "../../../components/Dashboard";
 import { detailSchedule } from "../../../store/actions/schedule";
 import { END } from "redux-saga";
 import { wrapper } from "../../../store";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {useRouter} from 'next/router';
 
-export const DJadwal = (props) => {
-  const state = useSelector(state => state)
-  return (
-    <>
-      <Head>
-        <title>Jadwal</title>
-        <meta name="description" content="Tourify Jadwal" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-        <DetailJadwal data={state.schedule.Detail} />
-    </>
-  );
-};
-
-export const getServerSideProps = wrapper.getServerSideProps(store =>
-  async({params}) => {
-  store.dispatch(detailSchedule(params.id))
-    // end the saga
-    store.dispatch(END);
-    await store.sagaTask.toPromise();
-    
-  const detail = store.getState().schedule.Detail
-  if(!detail){
-    return {
-      notFound:true
+class DJadwal extends React.Component{
+  constructor(props) {
+      super(props);
+      this.state = {
+          loading:false
+      }
+  }
+  componentDidUpdate(){
+    if(this.props.schedule.Detail!=null && this.state.loading == false){
+      this.setState({
+          loading:true
+      })
     }
   }
-  return {
-    props: {}, // Will be passed to the page component as props
-    // notFound:false
+
+componentDidMount(){
+  const id = window.location.href.substr(window.location.href.lastIndexOf('/') + 1)
+  console.log(id)
+this.props.dispatch(detailSchedule(id))
+// end the saga
+this.props.dispatch(END);
+}
+
+  render(){
+    if(this.state.loading == false){
+      return(
+        <>Loading...</>
+      )
+    }
+    return (
+      <>
+        <Head>
+          <title>Jadwal</title>
+          <meta name="description" content="Tourify Jadwal" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+          <DetailJadwal data={this.props.schedule.Detail} />
+      </>
+    );
   }
-})
-export default DJadwal
+}
+export default connect(state => state)(DJadwal);

@@ -119,40 +119,20 @@ function* registObjectSaga({payload}){
     }
 }
 
-function* registMapObjectSaga({payload}){
-    try {
-        // const hide = message.loading({
-        //     content:
-        //         'Data sedang diproses...',
-        //     className: 'custom-class',
-        //     style: {
-        //         marginTop: '20vh',
-        //     },
-        // });
-        // Dismiss manually and asynchronously
-        // setTimeout(hide, 2500);
-        const regis = yield call(objectRepository.getPlaceWisata, payload)
-        if(regis.responseMessage=="SUCCESS"){
-        yield put(registObjectSuccess(regis.data));
-        modalSuccessRegis('success')
-        }else{
-            modalRegistFailed('error')
-        }
-
-    } catch (error) {
-        console.log(error);
-    }
-}
 function* detailObjectSaga({payload}) {
+    console.log(payload)
     try {
-        const detail = yield call(objectRepository.getObjekWisata,payload);
-        if (!schedule) {
+        const detail = yield call(objectRepository.getDetailObjekWisata,payload);
+        if (!detail) {
             modalFailed('error','');
         } else {
             if (detail.responseMessage==="SUCCESS") {
-                yield put(detailObjectSuccess(schedule.data));
+                yield put(detailObjectSuccess(detail.data));
             } else {
                 modalFailed('error',detail.responseMessage);
+                Router.push({
+                    pathname: '/dashboard/objek-wisata',
+                });
             }
         }
     } catch (err) {
@@ -164,5 +144,4 @@ export default function* rootSaga() {
     yield all([takeEvery(actionTypes.LIST_OBJECT_REQUEST, getObjectSaga)]);
     yield all([takeEvery(actionTypes.DETAIL_OBJECT_REQUEST, detailObjectSaga)]);
     yield all([takeEvery(actionTypes.REGISTER_OBJECT_REQUEST, registObjectSaga)]);
-    // yield all([takeEvery(actionTypes.REGISTER_MAP_OBJECT_REQUEST, registObjectSaga)]);
 }

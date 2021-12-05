@@ -29,7 +29,7 @@ export default function DashboardIndex() {
     </>
   );
 }; 
-export const getServerSideProps = wrapper.getServerSideProps( store =>
+export const getStaticProps = wrapper.getStaticProps( store =>
   async() => {
     store.dispatch(listSchedule())
     store.dispatch(listParticipant())

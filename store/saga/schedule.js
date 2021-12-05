@@ -55,6 +55,9 @@ function* detailScheduleSaga({payload}) {
         const schedule = yield call(scheduleRepository.getDetailSchedule,payload);
         if (!schedule) {
             modalFailed('error','');
+            Router.push({
+                pathname: '/dashboard/jadwal',
+            });
         } else {
             if (schedule.responseMessage==="SUCCESS") {
                 yield put(detailScheduleSuccess(schedule.data));
@@ -62,7 +65,10 @@ function* detailScheduleSaga({payload}) {
                 //     pathname: '/dashboard',
                 // });
             } else {
-                modalFailed('error',user.responseMessage);
+                modalFailed('error',schedule.responseMessage);
+                Router.push({
+                    pathname: '/dashboard/jadwal',
+                });
             }
         }
     } catch (err) {

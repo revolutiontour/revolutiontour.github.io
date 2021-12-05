@@ -21,7 +21,7 @@ class ObjectRepository {
     }
     async getDetailObjekWisata(params) {
         const reponse = await Repository.get(
-            `${tourifyUrl}/objects/${params.id}`, 
+            `${tourifyUrl}/objects/${params}`, 
             // setHeader()
         )
             .then(response => {
@@ -29,19 +29,6 @@ class ObjectRepository {
             })
             .catch(error => ({ error: JSON.stringify(error) }));
         return reponse;
-    }
-    async registObjekWisata(params) {
-
-        const regis = await Repository.post(tourifyUrl + '/objects', params, 
-        // setHeader()
-        )
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log('error', error);
-            });
-        return regis;
     }
     async getPlaceWisata(params) {
         var {place} = params

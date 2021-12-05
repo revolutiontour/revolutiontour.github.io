@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { Divider } from "antd";
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
         </a>
         <a href="https://gunadarma.ac.id/" target="_blank" rel="noopener noreferrer">
           <span className="logo">
-            <Image src="/img/logo/tesla.svg" alt="Vercel Logo" width={72} height={16} />
+            {/* <Image src="/img/logo/tesla.svg" alt="Vercel Logo" width={72} height={16} /> */}
           </span>
         </a>
       </footer>

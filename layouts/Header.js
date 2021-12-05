@@ -3,7 +3,7 @@ import router, { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { Layout, Menu } from "antd";
 import { LogoutUser } from "../store/actions/UserActions";
-import Image from "next/image";
+// import Image from "next/image";
 export default function Header() {
   const { Header } = Layout;
   const { pathname, push } = useRouter();
@@ -34,7 +34,7 @@ export default function Header() {
       <Header style={{ zIndex: 1, width: "100%", background: "#fff" }}>
         <Menu theme="light" mode="horizontal" defaultSelectedKeys={[pathname]} style={{ lineHeight: "64px", width: "50%", float: "left" }}>
           <Menu.Item key="logo">
-            <Image src="/img/logo/tesla.svg" alt="Vercel Logo" width={72} height={16} />
+            {/* <Image src="/img/logo/tesla.svg" alt="Vercel Logo" width={72} height={16} /> */}
           </Menu.Item>
           {menu.map((el) =>
             el.login ? (

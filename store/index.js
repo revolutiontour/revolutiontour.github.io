@@ -4,6 +4,13 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from "./reducers";
 import rootSaga from './saga';
 import { createWrapper } from "next-redux-wrapper";
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
 
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -15,10 +22,11 @@ const bindMiddleware = (middleware) => {
 
 export const makeStore = (context) => {
   const sagaMiddleware = createSagaMiddleware()
-  const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]))
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
+  const store = createStore(persistedReducer, bindMiddleware([sagaMiddleware]))
+  const persistor = persistStore(store)
 
   store.sagaTask = sagaMiddleware.run(rootSaga)
-
   return store
 }
 

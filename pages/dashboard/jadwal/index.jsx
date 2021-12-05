@@ -31,14 +31,14 @@ const Jadwal =(props) =>{
 
 
 
-export const getServerSideProps = wrapper.getServerSideProps( store =>
+export const getStaticProps = wrapper.getStaticProps( store =>
   async() => {
     store.dispatch(listSchedule())
     store.dispatch(END)
     await store.sagaTask.toPromise()
   if (!store.getState().schedule.All) {
     return {
-      notFound: true,
+      notFound: false,
     }
   }
 
@@ -46,4 +46,3 @@ export const getServerSideProps = wrapper.getServerSideProps( store =>
 
 
  export default Jadwal;
-

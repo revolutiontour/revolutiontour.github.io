@@ -6,10 +6,13 @@ import { listObject } from "../../../store/actions/object";
 import { END } from "redux-saga";
 import { wrapper } from "../../../store";
 import { useSelector } from "react-redux";
+import { tourifyLocal } from "../../../repositories/Repository";
 
 export default function ObjekWisata() {
   const state = useSelector(state => state.object)
-  var data = state.All.map((el,i) =>({...el,avatar:"https://joeschmoe.io/api/v1/random"}))
+  var data = state.All.map((el,i) =>({...el,
+    href:tourifyLocal +'dashboard/objek-wisata/'+el.id,
+    avatar:"https://joeschmoe.io/api/v1/random"}))
   return (
     <>
       <Head>
@@ -22,12 +25,12 @@ export default function ObjekWisata() {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps( store =>
+export const getStaticProps = wrapper.getStaticProps( store =>
   async() => {
     store.dispatch(listObject())
     store.dispatch(END)
     await store.sagaTask.toPromise()
-  if (!store.getState().object.All) {
+  if (!store.getState().object.Detail) {
     return {
       notFound: false,
     }
