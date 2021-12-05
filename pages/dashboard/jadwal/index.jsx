@@ -15,7 +15,7 @@ const Jadwal =(props) =>{
     ...el,
     avatar : "https://joeschmoe.io/api/v1/random",
     title : `${el.title} #${i+1}`,
-    href : tourifyLocal +'dashboard/jadwal/'+ el.tourId.split("TTRDEV")[1]
+    href : '/dashboard/jadwal/'+ el.tourId.split("TTRDEV")[1]
   }))
   return (
     <>

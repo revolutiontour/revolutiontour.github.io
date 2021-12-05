@@ -11,7 +11,7 @@ import { tourifyLocal } from "../../../repositories/Repository";
 export default function ObjekWisata() {
   const state = useSelector(state => state.object)
   var data = state.All.map((el,i) =>({...el,
-    href:tourifyLocal +'dashboard/objek-wisata/'+el.id,
+    href:'/dashboard/objek-wisata/'+el.id,
     avatar:"https://joeschmoe.io/api/v1/random"}))
   return (
     <>
