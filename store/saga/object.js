@@ -30,8 +30,8 @@ const modalWarning = (type) => {
 
 const modalFailed = (type) => {
     notification[type]({
-        message: 'Login gagal!',
-        description: 'Wrong Username or Password!',
+        message: 'Gagal',
+        description: 'Gagal mendapatkan detail objek',
     });
 };
 
