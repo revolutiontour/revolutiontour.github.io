@@ -133,14 +133,14 @@ export default function RightMenu() {
   ];
   return (
     <>
-    <Menu mode="inline" className="d-none d-md-block">
+    <Menu mode="inline" className="d-none d-md-block py-1 align-self-center">
 
     {isLogged ? (
-      <Menu.Item key="app"onClick={Logout}>
+      <Menu.Item key="logout"onClick={Logout}>
         Logout
       </Menu.Item>
     ) : (
-      <Menu.Item key="app">
+      <Menu.Item key="login">
         <Link href="/users/login">Login</Link>
       </Menu.Item>
     )}
