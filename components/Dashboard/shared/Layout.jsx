@@ -38,7 +38,7 @@ export const DashboardLayout = ({ children }) => {
     edit: false,
     getIndex: null,
     record: null,
-    collapsed: false,
+    collapsed: true,
     visible: false
   });
   const { Header, Sider, Content } = Layout;
@@ -78,26 +78,29 @@ const onClose = () => {
           width="300"
           collapsible
           collapsed={collapsed}
+          className="d-none d-md-block"
         >
           <DashboardSidebar {...state} />
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background">
+          <Header className="site-layout-background px-0 px-md-5">
            
           <nav className="menuBar">
-              <div className="logo">
+              <div 
+          className="logo d-none d-md-block">
                 
               <a className="align-self-center" onClick={toggle}>
                   {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 </a>
               </div>
               <div className="menuCon">
-                <div className="leftMenu">
+                <div className="leftMenu d-block">
                   <LeftMenu />
                 </div>
                 <div className="rightMenu">
                   <RightMenu />
-                </div>{collapsed &&
+                </div>
+                {collapsed &&
                 <div
                   className="float-right barsMenu"
                   onClick={showDrawer}
@@ -108,13 +111,13 @@ const onClose = () => {
                   </a>
                 </div>}
                 <Drawer
-                  title="Basic Drawer"
+                  title="Dashboard Menu"
                   placement="right"
                   closable={false}
                   onClose={onClose}
                   visible={state.visible}
                 >
-                  <LeftMenu />
+                  {/* <LeftMenu /> */}
                   <RightMenu />
                 </Drawer>
               </div>

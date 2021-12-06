@@ -9,9 +9,10 @@ import {
   Layout,
   Menu,
   Card,
-  Col,
-  Row
+  // Col,
+  // Row
 } from "antd";
+import {Col, Row} from "react-bootstrap"
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -54,8 +55,8 @@ export const DashboardLanding = () => {
     <>
       <DashboardLayout>
         <div className="site-card-wrapper">
-          <Row gutter={16}>
-            <Col span={8}>
+          <Row>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <Card
                 className="text-white rounded-lg"
                 style={{
@@ -74,7 +75,7 @@ export const DashboardLanding = () => {
                 </div>
               </Card>
             </Col>
-            <Col span={8}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <Card
                 className="text-white rounded-lg"
                 style={{
@@ -93,7 +94,7 @@ export const DashboardLanding = () => {
               </div>
               </Card>
             </Col>
-            <Col span={8}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <Card
                 className="text-white rounded-lg"
                 style={{
@@ -115,8 +116,8 @@ export const DashboardLanding = () => {
           </Row>
         </div>
         <div className="site-card-wrapper mt-5">
-          <Row gutter={16}>
-            <Col span={12}>
+          <Row>
+            <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Card className="shadow-sm rounded-lg" title="Jadwal Terdekat">
                 {[...Array(3)].map((x, i) => (
                   <Card.Grid hoverable={false} style={gridStyle}>
@@ -140,7 +141,7 @@ export const DashboardLanding = () => {
                 ))}
               </Card>
             </Col>
-            <Col span={12}>
+            <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Card className="shadow-sm rounded-lg" title="Objek Destinasi">
                 {[...Array(3)].map((x, i) => (
                   <Card.Grid hoverable={false} style={gridStyle}>

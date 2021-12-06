@@ -5,14 +5,15 @@ import {
   Form,
   Input,
   Button,
-  Row,
-  Col,
+  // Row,
+  // Col,
   List,
   Skeleton,
   Space,
   Avatar,
   Radio
 } from "antd";
+import {Col, Row} from "react-bootstrap"
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { listLeader } from "../../store/actions/member";
@@ -95,21 +96,18 @@ export const DashboardAnggota = ({data}) => {
       <DashboardLayout>
         <h4 className="text-dark font-weight-bold mb-4">Anggota</h4>
         <Form layout="horizontal" className="mb-3">
-          <Row>
-            <Col span={22} className="align-self-center">
-              <Form.Item label="">
+          <Row className="mb-3">
+            <Col xs={8} md={10} className="align-self-center">
                 <Input size="large" onChange={onChange} placeholder="Search..." />
-              </Form.Item>
             </Col>
-            <Col span={2}>
-              <Form.Item label=" " className="ml-3" colon={false}>
+            <Col className="align-self-center">
                 <Button type="primary" htmlType="submit">
                   Cari
                 </Button>
-              </Form.Item>
             </Col>
           </Row>
-          <Row>
+          <Row className="justify-content-start">
+          <Col xs={12} md={2} className="mb-3 mb-md-0 align-self-center">
             <Radio.Group
             onChange={filterRole}
             value={role}
@@ -118,12 +116,14 @@ export const DashboardAnggota = ({data}) => {
               <Radio value={"participant"}>Participant</Radio>
               <Radio value={"leader"}>Leader</Radio>
             </Radio.Group>
-            
+            </Col>
+          <Col xs={12} md="10">
             <Link href="/dashboard/anggota/tambah">
-                <Button className="ml-3" type="primary" htmlType="submit">
-                  + Tambah Anggota
+                <Button className="ml-0 ml-md-3" type="primary" htmlType="submit">
+                  + Tambah
                 </Button>
                 </Link>
+                </Col>
           </Row>
         </Form>
         <List

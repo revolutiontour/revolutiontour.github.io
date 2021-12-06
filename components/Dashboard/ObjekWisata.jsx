@@ -5,8 +5,8 @@ import {
   Form,
   Input,
   Button,
-  Row,
-  Col,
+  // Row,
+  // Col,
   List,
   Skeleton,
   Space,
@@ -15,6 +15,7 @@ import {
 } from "antd";
 import Link from "next/link";
 import { PlusOutlined } from "@ant-design/icons";
+import {Col, Row} from "react-bootstrap"
 
 React.useLayoutEffect = React.useEffect;
 
@@ -63,30 +64,28 @@ export const DashboardObjekWisata = ({data}) => {
       <DashboardLayout>
         <h4 className="text-dark font-weight-bold mb-4">Objek Wisata</h4>
         <Form layout="horizontal" className="mb-3">
-          <Row>
-            <Col className="align-self-center" span={22}>
-              <Form.Item label="">
+          <Row className="mb-3">
+            <Col className="align-self-center" xs={8} md={10}>
                 <Input
                   size="large"
                   onChange={onChange}
                   placeholder="Search..."
                 />
-              </Form.Item>
             </Col>
-            <Col span={2}>
-              <Form.Item label=" " className="ml-3" colon={false}>
+            <Col>
                 <Button type="primary" htmlType="submit">
                   Cari
                 </Button>
-              </Form.Item>
             </Col>
           </Row>
           <Row>
+            <Col>
             <Link href="/dashboard/objek-wisata/tambah">
               <Button type="primary" htmlType="submit">
-                + Tambah Jadwal
+                + Tambah
               </Button>
             </Link>
+            </Col>
           </Row>
         </Form>
         <List

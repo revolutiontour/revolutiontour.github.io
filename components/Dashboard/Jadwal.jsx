@@ -80,7 +80,7 @@ export const DashboardJadwal = (props) => {
         <h4 className="text-dark font-weight-bold mb-4">Jadwal</h4>
         <Form layout="horizontal" className="mb-3">
           <div className="row">
-            <div className="col-11 align-self-center">
+            <div className="col-8 col-md-11 align-self-center">
               <Form.Item label="">
                 <DatePicker
                   className="w-100"
@@ -90,28 +90,26 @@ export const DashboardJadwal = (props) => {
                 />
               </Form.Item>
             </div>
-            <div className="col-1">
+            <div className="col-4 col-md-1">
             <Button type="primary" htmlType="submit" onClick={onClick}>
                 Cari
               </Button>
             </div>
           </div>
 
-          <div className="d-flex align-self-center">
-            <div className="mr-3">
+          <div className="d-flex">
+            <div className="mr-3 align-self-center">
               <Button type="ghost" htmlType="submit" onClick={onClick}>
                 Reset
               </Button>
             </div>
-            <div className="mr-3">
-              <Form.Item label=" " colon={false}>
+            <div className="mr-3 align-self-center">
                 
             <Link href="/dashboard/jadwal/tambah">
                 <Button type="primary" htmlType="submit">
-                  + Tambah Jadwal
+                  + Tambah
                 </Button>
                 </Link>
-              </Form.Item>
             </div>
           </div>
         </Form>
