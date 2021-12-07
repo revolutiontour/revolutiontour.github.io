@@ -9,6 +9,7 @@ import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
   key: 'root',
+  whitelist:['member'],
   storage,
 }
 
@@ -24,7 +25,7 @@ export const makeStore = (context) => {
   const sagaMiddleware = createSagaMiddleware()
   const persistedReducer = persistReducer(persistConfig, rootReducer)
   const store = createStore(persistedReducer, bindMiddleware([sagaMiddleware]))
-  const persistor = persistStore(store)
+  store.__persistor = persistStore(store)
 
   store.sagaTask = sagaMiddleware.run(rootSaga)
   return store

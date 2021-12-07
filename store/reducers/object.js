@@ -3,7 +3,6 @@ import { HYDRATE } from "next-redux-wrapper";
 const initialState = {
   All: null,
   Detail: null,
-  CurrentMap:null,
   CurrentData:{
     destination:null,
     desc:null,

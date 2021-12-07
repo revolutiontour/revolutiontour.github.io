@@ -13,7 +13,12 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 
 function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  const store = useStore();
+  return (
+    <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
+      <Component {...pageProps} />
+    </PersistGate>
+  );
 }
 
 export default wrapper.withRedux(App)

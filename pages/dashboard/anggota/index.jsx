@@ -35,9 +35,9 @@ export default function DashboardIndex(props) {
 export const getStaticProps = wrapper.getStaticProps(store =>
   async() => {
   if (!store.getState().member.participant) {
-    store.dispatch(listParticipant())
-    store.dispatch(listLeader())
-    store.dispatch(END)
+    await store.dispatch(listParticipant())
+    await store.dispatch(listLeader())
+    await store.dispatch(END)
   }
   await store.sagaTask.toPromise()
   return {
