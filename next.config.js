@@ -1,4 +1,8 @@
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
     reactStrictMode: true,
-    tourify:'http://localhost:3000/api'
+    tourify:'http://localhost:3000/api',
+  // Use the CDN in production and localhost for development.
+  assetPrefix: isProd ? 'https://cdn.statically.io/gh/NaveenDA/naveenda.github.io/gh-pages/' : '',
 }
