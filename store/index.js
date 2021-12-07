@@ -21,17 +21,25 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware)
 }
 
-export const makeStore = (context) => {
-  const sagaMiddleware = createSagaMiddleware()
-  const persistedReducer = persistReducer(persistConfig, rootReducer)
-  const store = createStore(persistedReducer, bindMiddleware([sagaMiddleware]))
-  store.__persistor = persistStore(store)
-
-  store.sagaTask = sagaMiddleware.run(rootSaga)
-  return store
-}
-
-export const wrapper = createWrapper(makeStore, { debug: true })
+const makeStore = ({ isServer }) => {
+  if (isServer) {
+  //If it's on server side, create a store
+  return createStore(rootReducer,initialState, bindMiddleware(middleware));
+  } else {
+  //If it's on client side, create a store which will persis
+  const persistConfig = {
+    key: "root",
+    storage: storage,
+    whiteList: [],
+  };
+  const persistedReducer = persistReducer(persistConfig, rootReducer);
+  const store = createStore(persistedReducer,initialState, bindMiddleware(middleware));
+  store.__persistor = persistStore(store); // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
+  return store;
+  }
+  };
+  // export an assembled wrapper
+  export const wrapper = createWrapper(makeStore);
 
 // const store = createStore(rootReducer, composeWithDevTools());
 // export default store;

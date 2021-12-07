@@ -15,9 +15,12 @@ import { Provider } from "react-redux";
 function App({ Component, pageProps }) {
   const store = useStore();
   return (
+    
+    <Provider store={store}>
     <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
       <Component {...pageProps} />
     </PersistGate>
+      </Provider>
   );
 }
 
