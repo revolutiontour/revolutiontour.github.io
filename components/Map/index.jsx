@@ -1,8 +1,8 @@
 import { Select, Form, Input, Button, Row, Col, DatePicker, List } from "antd";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
-import "leaflet-defaulticon-compatibility";
+// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+// import 'leaflet/dist/leaflet.css'
+// import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css'
+// import "leaflet-defaulticon-compatibility";
 import { DashboardLayout } from "../Dashboard/shared/Layout";
 import objectRepository from "../../repositories/objectRepository";
 import { useState } from "react";
