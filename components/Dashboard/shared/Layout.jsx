@@ -38,7 +38,7 @@ export const DashboardLayout = ({ children }) => {
     edit: false,
     getIndex: null,
     record: null,
-    collapsed: true,
+    collapsed: false,
     visible: false
   });
   const { Header, Sider, Content } = Layout;
@@ -90,7 +90,7 @@ const onClose = () => {
           className="logo d-none d-md-block">
                 
               <a className="align-self-center" onClick={toggle}>
-                  {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                  {!collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 </a>
               </div>
               <div className="menuCon">
@@ -100,7 +100,7 @@ const onClose = () => {
                 <div className="rightMenu">
                   <RightMenu />
                 </div>
-                {collapsed &&
+                {!collapsed &&
                 <div
                   className="float-right barsMenu"
                   onClick={showDrawer}

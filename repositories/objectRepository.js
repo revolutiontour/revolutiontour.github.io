@@ -30,6 +30,7 @@ class ObjectRepository {
             .catch(error => ({ error: JSON.stringify(error) }));
         return reponse;
     }
+
     async getPlaceWisata(params) {
         var {place} = params
         place = place.replace(" ", "+")
@@ -44,6 +45,21 @@ class ObjectRepository {
                 .catch(error => ({ error: JSON.stringify(error) }));
             return reponse;
         }
+
+    async registObjekWisata(params) {
+
+        const regis = await Repository.post(tourifyUrl + '/objects', params, 
+        // setHeader()
+        )
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
+        return regis;
+    }
+
 }
 
 export default new ObjectRepository

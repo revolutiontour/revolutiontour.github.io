@@ -26,7 +26,6 @@ React.useLayoutEffect = React.useEffect;
 
 export const DetailObjek = ({data=null}) => {
 
-console.log(data)
   const { Option } = Select;
 
   const onChange = (value) => {

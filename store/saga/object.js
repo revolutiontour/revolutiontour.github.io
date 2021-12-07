@@ -16,8 +16,8 @@ const modalSuccess = (type,name) => {
 
 const modalSuccessRegis = (type) => {
     notification[type]({
-        message: 'Registrasi Berhasil',
-        description: 'Silakan login untuk melanjutkan!',
+        message: 'Tambah data berhasil',
+        description: 'Silakan kembali ke list objek wisata untuk melihat!',
     });
 };
 
@@ -110,6 +110,9 @@ function* registObjectSaga({payload}){
         if(regis.responseMessage=="SUCCESS"){
         yield put(registObjectSuccess(regis.data));
         modalSuccessRegis('success')
+        Router.push({
+            pathname: '/dashboard/objek-wisata',
+        });
         }else{
             modalRegistFailed('error')
         }

@@ -24,7 +24,7 @@ export const DashboardSidebar = ({collapsed}) => {
       )
     },
     {
-      url: "/dashboard/anggota",
+      url: "/dashboard/anggota/index",
       text: "Anggota",
       icon: (
         <>
@@ -53,7 +53,7 @@ export const DashboardSidebar = ({collapsed}) => {
       ]
     },
     {
-      url: "/dashboard/jadwal",
+      url: "/dashboard/jadwal/index",
       text: "Jadwal",
       icon: (
         <>
@@ -82,7 +82,7 @@ export const DashboardSidebar = ({collapsed}) => {
       ]
     },
     {
-      url: "/dashboard/objek-wisata",
+      url: "/dashboard/objek-wisata/index",
       text: "Objek Wisata",
       icon: (
         <>
@@ -120,6 +120,26 @@ export const DashboardSidebar = ({collapsed}) => {
       )
     }
   ];
+  const MenuItem = ({url, icon, text}) => {
+
+    return (
+      <Menu.Item key={url} icon={icon}>
+      <Link href={url}>{text}</Link>
+      </Menu.Item>
+      )
+     }
+     const SubMenuItem = ({url, icon, text, submenu}) => {
+
+      return (
+        <SubMenu className="sidebar-sub-menu" key={url} icon={icon} title={text}>
+          {submenu.map((el) => (
+            <>
+              <Menu.Item icon={el.icon} key={el.url}><Link href={el.url}>{el.text}</Link></Menu.Item>
+            </>
+          ))}
+        </SubMenu>
+        )
+       }
   return (
     <>
     {!collapsed && 
@@ -131,19 +151,12 @@ export const DashboardSidebar = ({collapsed}) => {
       </h6>}
     <Menu theme="dark" style={{backgroundColor:"#E88C30"}} mode="inline" defaultSelectedKeys={[pathname]}>
       
-      {menu.map(({ url, icon, text, submenu }) => (
-          submenu ? (
-            <SubMenu className="sidebar-sub-menu" key={url} icon={icon} title={text}>
-              {submenu.map((el) => (
-                <>
-                  <Menu.Item icon={el.icon} key={el.url}><Link href={el.url}>{el.text}</Link></Menu.Item>
-                </>
-              ))}
-            </SubMenu>
+      {menu.map((menuProps) => (
+          menuProps.submenu ? (
+            SubMenuItem({...menuProps})
           ) : (
-            <Menu.Item key={url} icon={icon}>
-            <Link href={url}>{text}</Link>
-            </Menu.Item>
+            
+            MenuItem({...menuProps})
           )
       ))}
     </Menu>
