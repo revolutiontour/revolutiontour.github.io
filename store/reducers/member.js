@@ -15,6 +15,8 @@ const initialState = {
   const member = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
+      case HYDRATE:
+        return {...state, ...payload.member}
       case actionTypes.LOGIN_SUCCESS:
         return {
             ...state, 

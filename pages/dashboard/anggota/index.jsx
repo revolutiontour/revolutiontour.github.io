@@ -7,15 +7,15 @@ import { useSelector } from "react-redux";
 import { END } from "redux-saga";
 import { wrapper } from "../../../store";
 
-export default function DashboardIndex(props) {
-  const state = useSelector(state => state.member)
-  var data = state.participant && state.participant.map((el,i)=> ({
+export default function DashboardIndex({data}) {
+  // const state = useSelector(state => state.member)
+  var nudata = data.participant.map((el,i)=> ({
     ...el,
     avatar : "https://joeschmoe.io/api/v1/random",
     role : 'participant'
   }))
-  state.leader && state.leader.map((el,i)=> {
-    data.push({
+  data.leader.map((el,i)=> {
+    nudata.push({
       ...el,
       avatar:"https://joeschmoe.io/api/v1/random",
       role:'leader'
@@ -28,20 +28,24 @@ export default function DashboardIndex(props) {
         <meta name="description" content="Tourify Anggota" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <DashboardAnggota data={data} />
+        <DashboardAnggota data={nudata} />
     </>
   );
 };
 export const getStaticProps = wrapper.getStaticProps(store =>
   async() => {
+    store.dispatch(listParticipant())
+    store.dispatch(listLeader())
+    store.dispatch(END)
+    await store.sagaTask.toPromise()
   if (!store.getState().member.participant) {
-   store.dispatch(listParticipant())
-   store.dispatch(listLeader())
-   store.dispatch(END)
+    return {
+      notFound: false,
+    }
   }
-  await store.sagaTask.toPromise()
+  const data = await store.getState().member
   return {
-    notFound: false,
+    props: { data }, // will be passed to the page component as props
   }
   // store.dispatch(END)
 })

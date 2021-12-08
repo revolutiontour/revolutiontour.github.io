@@ -8,9 +8,9 @@ import { wrapper } from "../../../store";
 import { useSelector } from "react-redux";
 import { tourifyLocal } from "../../../repositories/Repository";
 
-export default function ObjekWisata() {
-  const state = useSelector(state => state.object)
-  var data = state.All.map((el,i) =>({...el,
+export default function ObjekWisata({data=[]}) {
+  // const state = useSelector(state => state.object)
+  var nudata = data.map((el,i) =>({...el,
     href:'/dashboard/objek-wisata/'+el.id,
     avatar:"https://joeschmoe.io/api/v1/random"}))
   return (
@@ -20,7 +20,7 @@ export default function ObjekWisata() {
         <meta name="description" content="Tourify Objek Wisata" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <DashboardObjekWisata data={data} />
+        <DashboardObjekWisata data={nudata} />
     </>
   );
 };
@@ -30,10 +30,14 @@ export const getStaticProps = wrapper.getStaticProps( store =>
     store.dispatch(listObject())
     store.dispatch(END)
     await store.sagaTask.toPromise()
-  if (!store.getState().object.Detail) {
+  if (!store.getState().object.All) {
     return {
       notFound: false,
     }
+  }
+  const data = await store.getState().object.All
+  return {
+    props: { data }, // will be passed to the page component as props
   }
 
 })

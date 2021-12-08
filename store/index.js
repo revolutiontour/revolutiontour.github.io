@@ -3,8 +3,8 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from "./reducers";
 import rootSaga from './saga';
 import { createWrapper } from "next-redux-wrapper";
-// import storage from 'redux-persist/lib/storage';
-import storage from './sync_storage';
+import storage from 'redux-persist/lib/storage';
+// import storage from './sync_storage';
 
 
 const bindMiddleware = (middleware) => {

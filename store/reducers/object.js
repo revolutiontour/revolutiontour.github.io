@@ -13,6 +13,8 @@ const initialState = {
 const object = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case HYDRATE:
+      return {...state, ...payload.object}
     case actionTypes.LIST_OBJECT_SUCCESS:
       return { 
           ...state, 

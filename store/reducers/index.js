@@ -19,7 +19,6 @@ const allReducers = (state, action) => {
       ...state,
       ...action.payload,
     };
-    if (state.count) nextState.count = state.count;
     return nextState;
   }
   else {
@@ -27,4 +26,4 @@ const allReducers = (state, action) => {
   }
 }
 
-export default allReducers;
+export default combinedReducers;
