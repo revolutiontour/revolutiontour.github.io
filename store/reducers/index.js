@@ -4,10 +4,27 @@ import UserReducer from "./UserReducer";
 import member from "./member"
 import schedule from './schedule'
 import object from './object'
-export default combineReducers({
+import { HYDRATE } from "next-redux-wrapper";
+
+const combinedReducers = combineReducers({
   // todoReducer,
   // UserReducer,
   member,
   schedule,
   object,
 });
+const allReducers = (state, action) => {
+  if (action.type === HYDRATE) {
+    const nextState = {
+      ...state,
+      ...action.payload,
+    };
+    if (state.count) nextState.count = state.count;
+    return nextState;
+  }
+  else {
+    return combinedReducers(state, action);
+  }
+}
+
+export default allReducers;

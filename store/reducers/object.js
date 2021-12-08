@@ -13,27 +13,22 @@ const initialState = {
 const object = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case HYDRATE:
-      return { 
-          ...state, 
-        ...payload.object };
     case actionTypes.LIST_OBJECT_SUCCESS:
       return { 
           ...state, 
-          ...{ All: payload } 
+           All: payload
         };
     case actionTypes.DETAIL_OBJECT_SUCCESS:
       return { 
           ...state, 
-          ...{ Detail: payload } 
+           Detail: payload
         };
         case actionTypes.CURRENT_REGISTER_OBJECT:
           return { 
               ...state, 
-              ...{ 
                 CurrentData: 
                 {...payload}
-              } 
+              
             };
         case actionTypes.REGISTER_MAP_OBJECT_SUCCESS:
           return { 
@@ -46,10 +41,8 @@ const object = (state = initialState, action) => {
                 }
               } 
             };
-    default:
-      return {
-        ...state
-      };
+            default:
+              return state;
   }
 };
 

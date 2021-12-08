@@ -15,45 +15,41 @@ const initialState = {
   const member = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
-      case HYDRATE:
-            return {...state, ...payload.member};
       case actionTypes.LOGIN_SUCCESS:
         return {
             ...state, 
-           ...{ success: true,
+            success: true,
             username:payload.userName,
             tourId:payload.tourId,
-            isLeader:payload.isLeader}
+            isLeader:payload.isLeader
         };
       case actionTypes.LOGOUT_SUCCESS:
         return {
           ...state,
-          ...{success: false,username:null}
+          success: false,username:null
         };
         case actionTypes.LIST_TL_SUCCESS:
           return {
             ...state,
-            ...{leader:payload}
+            leader:payload
           };
           case actionTypes.LIST_TP_SUCCESS:
             return {
               ...state,
-              ...{participant:payload}
+              participant:payload
             };
       case actionTypes.REGISTER_SUCCESS:
         return {
           ...state,
-          ...{isRegisteredIn: true, userRegister: payload}
+          isRegisteredIn: true, userRegister: payload
         };
         case actionTypes.REGISTER_TP_SUCCESS:
           return {
             ...state,
-            ...{isRegisteredIn: true, userRegister: payload}
+            isRegisteredIn: true, userRegister: payload
           };
-      default:
-        return {
-          ...state
-        };
+          default:
+            return state;
     }
   };
   

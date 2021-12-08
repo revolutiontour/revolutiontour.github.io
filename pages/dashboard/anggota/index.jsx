@@ -9,12 +9,12 @@ import { wrapper } from "../../../store";
 
 export default function DashboardIndex(props) {
   const state = useSelector(state => state.member)
-  var data = state.participant.map((el,i)=> ({
+  var data = state.participant && state.participant.map((el,i)=> ({
     ...el,
     avatar : "https://joeschmoe.io/api/v1/random",
     role : 'participant'
   }))
-  state.leader.map((el,i)=> {
+  state.leader && state.leader.map((el,i)=> {
     data.push({
       ...el,
       avatar:"https://joeschmoe.io/api/v1/random",
@@ -35,9 +35,9 @@ export default function DashboardIndex(props) {
 export const getStaticProps = wrapper.getStaticProps(store =>
   async() => {
   if (!store.getState().member.participant) {
-    await store.dispatch(listParticipant())
-    await store.dispatch(listLeader())
-    await store.dispatch(END)
+   store.dispatch(listParticipant())
+   store.dispatch(listLeader())
+   store.dispatch(END)
   }
   await store.sagaTask.toPromise()
   return {
