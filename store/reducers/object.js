@@ -1,8 +1,8 @@
 import { actionTypes } from "../actions/object";
 import { HYDRATE } from "next-redux-wrapper";
 const initialState = {
-  All: null,
-  Detail: null,
+  oAll: null,
+  oDetail: null,
   CurrentData:{
     destination:null,
     desc:null,
@@ -14,16 +14,20 @@ const object = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case HYDRATE:
+      console.log("HYDRATE object")
+      if(state.oAll){
+        delete payload.object.oAll
+      }
       return {...state, ...payload.object}
     case actionTypes.LIST_OBJECT_SUCCESS:
       return { 
           ...state, 
-           All: payload
+          oAll: payload
         };
     case actionTypes.DETAIL_OBJECT_SUCCESS:
       return { 
           ...state, 
-           Detail: payload
+          oDetail: payload
         };
         case actionTypes.CURRENT_REGISTER_OBJECT:
           return { 

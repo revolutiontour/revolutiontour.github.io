@@ -27,15 +27,15 @@ export default function ObjekWisata({data=[]}) {
 
 export const getStaticProps = wrapper.getStaticProps( store =>
   async() => {
-    store.dispatch(listObject())
-    store.dispatch(END)
+    await store.dispatch(listObject())
+    await store.dispatch(END)
     await store.sagaTask.toPromise()
-  if (!store.getState().object.All) {
+  if (!store.getState().object.oAll) {
     return {
       notFound: false,
     }
   }
-  const data = await store.getState().object.All
+  const data = await store.getState().object.oAll
   return {
     props: { data }, // will be passed to the page component as props
   }

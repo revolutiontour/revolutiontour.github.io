@@ -33,15 +33,15 @@ const Jadwal =({data}) =>{
 
 export const getStaticProps = wrapper.getStaticProps( store =>
   async() => {
-    store.dispatch(listSchedule())
-    store.dispatch(END)
+    await store.dispatch(listSchedule())
+    await store.dispatch(END)
     await store.sagaTask.toPromise()
-  if (!store.getState().schedule.All) {
+  if (!store.getState().schedule.sAll) {
     return {
       notFound: false,
     }
   }
-  const data = await store.getState().schedule.All
+  const data = await store.getState().schedule.sAll
   return {
     props: { data }, // will be passed to the page component as props
   }

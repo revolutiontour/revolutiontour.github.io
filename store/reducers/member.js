@@ -16,7 +16,12 @@ const initialState = {
     const { type, payload } = action;
     switch (type) {
       case HYDRATE:
-        return {...state, ...payload.member}
+        console.log("HYDRATE member")
+        if(state.leader && state.participant){
+          delete payload.member.leader
+          delete payload.member.participant
+        }
+        return {...state,  ...payload.member}
       case actionTypes.LOGIN_SUCCESS:
         return {
             ...state, 

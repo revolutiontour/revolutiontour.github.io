@@ -30,7 +30,7 @@ const makeStore = ({ isServer }) => {
   const persistConfig = {
     key: "root",
     storage: storage,
-    whiteList: ["member"],
+    // whitelist: ["member","object"],
   };
   const persistedReducer = persistReducer(persistConfig, rootReducer);
   const store = createStore(persistedReducer, bindMiddleware([sagaMiddleware]));
