@@ -19,7 +19,7 @@ const schedule = (state = initialState, action) => {
       case actionTypes.DETAIL_SCHEDULE_SUCCESS:
           return { 
             ...state, 
-            Detail:payload };
+            sDetail:payload };
             default:
               return state;
   }

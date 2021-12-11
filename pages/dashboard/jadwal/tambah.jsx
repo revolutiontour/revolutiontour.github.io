@@ -8,12 +8,13 @@ import { END } from "redux-saga";
 import { wrapper } from "../../../store";
 import { listObject } from "../../../store/actions/object";
 
-export default function AddJadwal({object,leader}) {
-  // const state = useSelector(state => state)
+export default function AddJadwal() {
+  const state = useSelector(state => state)
   var data = {
-    object,
-    leader
+    object:state.object.oAll,
+    leader:state.member.leader
   }
+
   return (
     <>
       <Head>
@@ -33,14 +34,9 @@ export const getStaticProps = wrapper.getStaticProps( store =>
     store.dispatch(END)
 
     await store.sagaTask.toPromise()
-  if (!store.getState().object.All || !store.getState().member.leader) {
+  if (!store.getState().object.oAll || !store.getState().member.leader) {
     return {
       notFound: true,
     }
-  }
-  const leader = await store.getState().member.leader
-  const object = await store.getState().object.All
-  return {
-    props: { object,leader }, // will be passed to the page component as props
   }
 })

@@ -17,6 +17,9 @@ const initialState = {
     switch (type) {
       case HYDRATE:
         console.log("HYDRATE member")
+        if(state.success){
+          delete payload.member.success
+        }
         if(state.leader && state.participant){
           delete payload.member.leader
           delete payload.member.participant

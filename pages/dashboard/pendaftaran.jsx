@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 
 export default function DashboardIndex() { 
   const state = useSelector(state => state)
-  const schedule = state.schedule.All.map((el,i) =>({
+  const schedule = state.schedule.sAll.map((el,i) =>({
       ...el,
       id:el.tourId.split("TTRDEV")[1]
   }))
@@ -35,7 +35,7 @@ export const getStaticProps = wrapper.getStaticProps( store =>
     store.dispatch(listParticipant())
     store.dispatch(END)
     await store.sagaTask.toPromise()
-  if (!store.getState().schedule.All || !store.getState().member.participant) {
+  if (!store.getState().schedule.sAll || !store.getState().member.participant) {
     return {
       notFound: true,
     }

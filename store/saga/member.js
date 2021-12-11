@@ -6,6 +6,7 @@ import memberRepository from '../../repositories/memberRepository';
 
 
 import Router from 'next/router';
+import { userService } from '../../testing/user.data';
 
 const modalSuccess = (type,name) => {
     notification[type]({
@@ -86,7 +87,8 @@ const modalRegistFailed = (type) => {
 
 function* loginSaga({ payload }) {
     try {
-        const user = yield call(memberRepository.loginMember, payload);
+        // const user = yield call(memberRepository.loginMember, payload);
+        const user = userService.login(payload)
         if (!user) {
             modalFailed('error');
         } else {

@@ -8,10 +8,10 @@ import { tourifyLocal } from "../../../repositories/Repository";
 import { END } from "redux-saga";
 import { wrapper } from "../../../store";
 
-const Jadwal =({data}) =>{
-  // const state = useSelector(state => state)
+const Jadwal =() =>{
+  const state = useSelector(state => state)
   
-  var nudata = data.map((el,i)=> ({
+  var nudata = state.schedule.sAll.map((el,i)=> ({
     ...el,
     avatar : "https://joeschmoe.io/api/v1/random",
     title : `${el.title} #${i+1}`,
@@ -40,10 +40,6 @@ export const getStaticProps = wrapper.getStaticProps( store =>
     return {
       notFound: false,
     }
-  }
-  const data = await store.getState().schedule.sAll
-  return {
-    props: { data }, // will be passed to the page component as props
   }
 
 })

@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 import { tourifyLocal } from "../../../repositories/Repository";
 
 export default function ObjekWisata({data=[]}) {
-  // const state = useSelector(state => state.object)
-  var nudata = data.map((el,i) =>({...el,
+  const state = useSelector(state => state.object)
+  var nudata = state.oAll.map((el,i) =>({...el,
     href:'/dashboard/objek-wisata/'+el.id,
     avatar:"https://joeschmoe.io/api/v1/random"}))
   return (
@@ -34,10 +34,6 @@ export const getStaticProps = wrapper.getStaticProps( store =>
     return {
       notFound: false,
     }
-  }
-  const data = await store.getState().object.oAll
-  return {
-    props: { data }, // will be passed to the page component as props
   }
 
 })

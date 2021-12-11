@@ -8,13 +8,13 @@ import { END } from "redux-saga";
 import { wrapper } from "../../../store";
 
 export default function DashboardIndex({data}) {
-  // const state = useSelector(state => state.member)
-  var nudata = data.participant.map((el,i)=> ({
+  const state = useSelector(state => state.member)
+  var nudata = state.participant.map((el,i)=> ({
     ...el,
     avatar : "https://joeschmoe.io/api/v1/random",
     role : 'participant'
   }))
-  data.leader.map((el,i)=> {
+  state.leader.map((el,i)=> {
     nudata.push({
       ...el,
       avatar:"https://joeschmoe.io/api/v1/random",
@@ -42,10 +42,6 @@ export const getStaticProps = wrapper.getStaticProps(store =>
     return {
       notFound: false,
     }
-  }
-  const data = await store.getState().member
-  return {
-    props: { data }, // will be passed to the page component as props
   }
   // store.dispatch(END)
 })
