@@ -14,10 +14,10 @@ export default function Header() {
       url: "/",
       text: "Home",
     },
-    {
-      url: "/users/register",
-      text: "Registration",
-    },
+    // {
+    //   url: "/users/register",
+    //   text: "Registration",
+    // },
 
     {
       url: "/dashboard",

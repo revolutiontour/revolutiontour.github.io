@@ -7,11 +7,11 @@ import styles from "./Login.module.css";
 import { wrapper } from "../../store";
 import { connect } from "react-redux";
 import Router from "next/router";
+import { TourifyLogo } from "../shared/icons";
 
 const Login = ({member,success}) => {
-  console.log(member);
   // const member = useSelector(state => state.member)
-  const router = useRouter();
+  const { push } = useRouter();
   const dispatch = useDispatch();
 
   //memakai useSelector untuk mengambil state dari redux
@@ -34,20 +34,16 @@ const Login = ({member,success}) => {
   // }, []);
   // console.log(member)
   return (
-    <div className="mx-auto my-3 container">
+    <div className="mx-auto my-5 p-5 container w-50 bg-white rounded">
       <div className="row">
         <div className="col-12">
-          <h1 className={styles.h1Style}>LOGIN</h1>
+          <p className="text-center"><TourifyLogo width="85"/></p>
+          <h4 className={styles.h1Style}>TTR Operator</h4>
         </div>
         <div className="col-12">
           <Form
             name="basic"
-            labelCol={{
-              span: 6
-            }}
-            wrapperCol={{
-              span: 16
-            }}
+            layout="vertical"
             initialValues={{
               remember: true
             }}
@@ -65,7 +61,7 @@ const Login = ({member,success}) => {
                 }
               ]}
             >
-              <Input />
+              <Input placeholder="Username Admin" />
             </Form.Item>
 
             <Form.Item
@@ -78,10 +74,10 @@ const Login = ({member,success}) => {
                 }
               ]}
             >
-              <Input.Password />
+              <Input.Password placeholder="Password" />
             </Form.Item>
 
-            <Form.Item
+            {/* <Form.Item
               label="TourId"
               name="tourId"
               rules={[
@@ -105,15 +101,11 @@ const Login = ({member,success}) => {
                 <Radio value={0}>Participant</Radio>
                 <Radio value={1}>Leader</Radio>
               </Radio.Group>
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item
-              wrapperCol={{
-                offset: 6,
-                span: 16
-              }}
             >
               <Button type="primary" htmlType="submit">
-                Submit
+                Masuk
               </Button>
             </Form.Item>
           </Form>

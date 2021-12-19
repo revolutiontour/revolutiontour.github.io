@@ -9,6 +9,7 @@ import {
   UserAddOutlined,
   TeamOutlined
 } from "@ant-design/icons";
+import { TourifyLogo } from "../../shared/icons";
 
 export const DashboardSidebar = ({collapsed}) => {
   const { SubMenu } = Menu;
@@ -145,8 +146,8 @@ export const DashboardSidebar = ({collapsed}) => {
     {!collapsed && 
     <h6 className="text-white p-4">
       <div className="row">
-        <div className="col-6 align-self-center text-center">Logo</div>
-        <div className="col-6">Tour Guide <br /> Dashboard</div>
+        <div className="col-6 align-self-center text-center"><TourifyLogo width="80"/></div>
+        <div className="col-6 align-self-center">Tour Guide <br /> Dashboard</div>
       </div>
       </h6>}
     <Menu theme="dark" style={{backgroundColor:"#E88C30"}} mode="inline" defaultSelectedKeys={[pathname]}>
