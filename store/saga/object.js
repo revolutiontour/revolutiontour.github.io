@@ -109,9 +109,10 @@ function* registObjectSaga({payload}){
         const regis = yield call(objectRepository.registObjekWisata, payload)
         if(regis.responseMessage=="SUCCESS"){
         yield put(registObjectSuccess(regis.data));
+        yield call(getObjectSaga)
         modalSuccessRegis('success')
         Router.push({
-            pathname: '/dashboard/objek-wisata',
+            pathname: '/dashboard',
         });
         }else{
             modalRegistFailed('error')

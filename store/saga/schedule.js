@@ -1,10 +1,11 @@
 import { all, put, takeEvery, call } from 'redux-saga/effects';
 import { notification,message } from 'antd';
 
-import { actionTypes, detailScheduleSuccess, listScheduleSuccess, registTourGroupScheduleSuccess } from '../actions/schedule';
+import { actionTypes, detailScheduleSuccess, listSchedule, listScheduleSuccess, registTourGroupScheduleSuccess } from '../actions/schedule';
 import scheduleRepository from '../../repositories/scheduleRepository';
 
 import Router from 'next/router';
+import { useDispatch } from 'react-redux';
 
 const modalFailed = (msg) => {
     notification['error']({
@@ -56,7 +57,7 @@ function* detailScheduleSaga({payload}) {
         if (!schedule) {
             modalFailed('error','');
             Router.push({
-                pathname: '/dashboard/jadwal',
+                pathname: '/dashboard',
             });
         } else {
             if (schedule.responseMessage==="SUCCESS") {
@@ -67,7 +68,7 @@ function* detailScheduleSaga({payload}) {
             } else {
                 modalFailed('error',schedule.responseMessage);
                 Router.push({
-                    pathname: '/dashboard/jadwal',
+                    pathname: '/dashboard',
                 });
             }
         }
@@ -78,6 +79,7 @@ function* detailScheduleSaga({payload}) {
 
 function* registTourGroupScheduleSaga({payload}) {
     console.log('regist Tour Group Schedule')
+    const dispatch = useDispatch();
     try {
         const schedule = yield call(scheduleRepository.registTourGroupSchedule,payload);
         if (!schedule) {
@@ -87,6 +89,7 @@ function* registTourGroupScheduleSaga({payload}) {
             if (schedule.responseMessage==="SUCCESS") {
                 // yield put(registTourGroupScheduleSuccess(schedule.data));
                 modalSuccessRegis()
+                yield call(listScheduleSaga)
                 Router.push({
                     pathname: '/dashboard',
                 });
@@ -109,6 +112,7 @@ function* registTourScheduleSaga({payload}) {
             if (schedule.responseMessage==="SUCCESS") {
                 // yield put(registTourGroupScheduleSuccess(schedule.data));
                 modalSuccessRegis()
+                yield call(listScheduleSaga)
                 Router.push({
                     pathname: '/dashboard',
                 });

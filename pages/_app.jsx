@@ -6,6 +6,8 @@ import "../styles/globals.css";
 import "../styles/dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -14,6 +16,9 @@ import { Provider } from "react-redux";
 
 function MyApp({ Component, pageProps }) {
   const store = useStore((state) => state);
+  /*  !![NOTICE] REMOVE THIS IF YOU WANT TO DEBUG ON DEV!! */
+  console.log = console.warn = console.error = () => {};
+  /*  !![END OF NOTICE] REMOVE THIS IF YOU WANT TO DEBUG ON DEV!! */
   return process.browser ? (
     <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
       <Component {...pageProps} />

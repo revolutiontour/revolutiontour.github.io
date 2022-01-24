@@ -34,7 +34,7 @@ const Login = ({member,success}) => {
   // }, []);
   // console.log(member)
   return (
-    <div className="mx-auto my-5 p-5 container w-50 bg-white rounded">
+    <div className="mx-md-auto my-5 p-3 p-md-5 container w-100 w-md-50 bg-white rounded">
       <div className="row">
         <div className="col-12">
           <p className="text-center"><TourifyLogo width="85"/></p>

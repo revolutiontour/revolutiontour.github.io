@@ -46,6 +46,19 @@ class ObjectRepository {
             return reponse;
         }
 
+        async getCurrentLoc(params) {
+            var {lat,long} = params
+            const token = "BYrIifYEk_cazqQRnTgSzrkZcrq7UyvsF4ZPGTgg0fQ"
+                const reponse = await Repository.get(
+                    `https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat},${long}&apiKey=${token}`, 
+                    // setHeader()
+                )
+                    .then(response => {
+                        return response.data;
+                    })
+                    .catch(error => ({ error: JSON.stringify(error) }));
+                return reponse;
+            }
     async registObjekWisata(params) {
 
         const regis = await Repository.post(tourifyUrl + '/objects', params, 

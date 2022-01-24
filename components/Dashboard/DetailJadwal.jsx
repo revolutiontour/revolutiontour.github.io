@@ -61,23 +61,23 @@ export const DetailJadwal = ({data}) => {
           layout="vertical"
         >
         <Form.Item label="Nama Acara">
-            <h4>{data.title}</h4>
+            <h4>{data?.title}</h4>
         </Form.Item>
           <Form.Item label="Tanggal Mulai Acara :">
-          <p>{data.startDate}</p>
+          <p>{data?.startDate}</p>
           </Form.Item>
           <Form.Item label="Tanggal Selesai Acara :">
-          <p>{data.endDate}</p>
+          <p>{data?.endDate}</p>
           </Form.Item>
           <Form.Item label="Objek Destinasi :">
-          <p>{data.destination}</p>
+          <p>{data?.destination}</p>
           </Form.Item>
           <Form.Item label="Tour Leader :">
-              <p>{data.leaderName}</p>
+              <p>{data?.leaderName}</p>
           </Form.Item>
           
           <Card className="shadow-sm rounded-lg" title="Partisipan :" style={gridStyle}>
-                {data.participants.map(({id,name}) => (
+                {data?.participants.map(({id,name}) => (
                   <Card.Grid hoverable={false} style={{width:'100%'}}>
                     <h6>{name}</h6>
                   </Card.Grid>

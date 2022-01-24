@@ -6,8 +6,8 @@ export const userService = {
 }
 function login(params){
     const {username,password,tourId,isLeader} = params
-    if(username==="UOT5JQ08"
-    &&password==="B490CVQ7"
+    if(username==="admin_ttr_1"
+    &&password==="admin_pwd_test"
     // &&tourId==="TTRDEV2"
     // &&isLeader===0
     ){

@@ -20,6 +20,7 @@ import {
   ScheduleOutlined,
   StarOutlined
 } from "@ant-design/icons";
+import { Jadwal as JadwalIcon } from "../shared/icons";
 
 React.useLayoutEffect = React.useEffect;
 
@@ -134,8 +135,11 @@ export const DashboardJadwal = (props) => {
             >
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.avatar} />}
-                  title={<a href={item.href}>{item.title}</a>}
+                  avatar={
+                    <JadwalIcon/>
+                  // <Avatar src={item.avatar} />
+                }
+                  title={<Link href={item.href} as={item.customUrl}>{item.title}</Link>}
                   description={[
                     <div className="d-inline-flex align-items-center mr-3">
                       <IconText

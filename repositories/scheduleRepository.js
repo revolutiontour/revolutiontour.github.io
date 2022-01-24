@@ -73,6 +73,19 @@ class ScheduleRepository {
             .catch(error => ({ error: JSON.stringify(error) }));
         return reponse;
     }
+
+    async getStatistic(params) {
+        const reponse = await Repository.get(
+            `${tourifyUrl}/info/generic-statistic`, 
+            params
+            // setHeader()
+        )
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => ({ error: JSON.stringify(error) }));
+        return reponse;
+    }
 }
 
 export default new ScheduleRepository

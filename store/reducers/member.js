@@ -16,6 +16,7 @@ const initialState = {
     const { type, payload } = action;
     switch (type) {
       case HYDRATE:
+        console.log("member hydrate",payload)
         console.log("HYDRATE member")
         if(state.success){
           delete payload.member.success
@@ -35,7 +36,7 @@ const initialState = {
         };
       case actionTypes.LOGOUT_SUCCESS:
         return {
-          ...state,
+          ...initialState,
           success: false,username:null
         };
         case actionTypes.LIST_TL_SUCCESS:
@@ -43,7 +44,7 @@ const initialState = {
             ...state,
             leader:payload
           };
-          case actionTypes.LIST_TP_SUCCESS:
+        case actionTypes.LIST_TP_SUCCESS:
             return {
               ...state,
               participant:payload

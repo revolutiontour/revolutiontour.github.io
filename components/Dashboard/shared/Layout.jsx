@@ -11,7 +11,8 @@ import {
   Menu,
   Card,
   Col,
-  Row,Drawer
+  Row,
+  Drawer,
 } from "antd";
 import {
   MenuUnfoldOutlined,
@@ -27,6 +28,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { DashboardSidebar } from "./Sidebar";
 import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
+import Head from "next/head";
 
 React.useLayoutEffect = React.useEffect;
 
@@ -51,18 +53,17 @@ export const DashboardLayout = ({ children }) => {
   };
 
   const showDrawer = () => {
-    setstate(prev=>({
+    setstate((prev) => ({
       ...prev,
-      visible: true,
+      visible: true
     }));
   };
-const onClose = () => {
-  setstate(prev=>({
-    ...prev,
-    visible: false,
-  }));
+  const onClose = () => {
+    setstate((prev) => ({
+      ...prev,
+      visible: false
+    }));
   };
-
 
   useEffect(() => {
     if (!isLogged) {
@@ -70,9 +71,8 @@ const onClose = () => {
     }
   }, []);
   if (!isLogged) {
-    return (<>Loading...</>)
-  }else{
-
+    return <>Loading...</>;
+  } else {
     return (
       <>
         <Layout>
@@ -88,12 +88,9 @@ const onClose = () => {
           </Sider>
           <Layout className="site-layout">
             <Header className="site-layout-background px-0 px-md-5">
-             
-            <nav className="menuBar">
-                <div 
-            className="logo d-none d-md-block">
-                  
-                <a className="align-self-center" onClick={toggle}>
+              <nav className="menuBar">
+                <div className="logo d-none d-md-block">
+                  <a className="align-self-center" onClick={toggle}>
                     {!collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                   </a>
                 </div>
@@ -104,22 +101,24 @@ const onClose = () => {
                   <div className="rightMenu">
                     <RightMenu />
                   </div>
-                  {!collapsed &&
-                  <div
-                    className="float-right barsMenu"
-                    onClick={showDrawer}
-                  >
-                  <a onClick={showDrawer}>
-                     
-                    <MenuFoldOutlined />
-                    </a>
-                  </div>}
+                  {!collapsed && (
+                    <div className="float-right barsMenu" onClick={showDrawer}>
+                      <a onClick={showDrawer}>
+                        <MenuFoldOutlined />
+                      </a>
+                    </div>
+                  )}
                   <Drawer
                     title="Dashboard Menu"
                     placement="right"
                     closable={false}
                     onClose={onClose}
                     visible={state.visible}
+                    extra={
+                      <Space>
+                        <Button onClick={onClose}>Close</Button>
+                      </Space>
+                    }
                   >
                     {/* <LeftMenu /> */}
                     <RightMenu />

@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { listLeader } from "../../store/actions/member";
 import { useSelector } from "react-redux";
+import { ProfilePicture } from "../shared/icons";
 
 React.useLayoutEffect = React.useEffect;
 
@@ -29,7 +30,6 @@ export const DashboardAnggota = ({data}) => {
       href: "https://ant.design",
       role:"leader",
       title: `mamangkesbor${i}`,
-      avatar: "https://joeschmoe.io/api/v1/random",
       description:
         "Ant Design, a design language for background applications, is refined by Ant UED Team.",
       content: "content"
@@ -39,7 +39,6 @@ export const DashboardAnggota = ({data}) => {
       href: "https://ant.design",
       role:"participant",
       title: `mamangkesbor${i}`,
-      avatar: "https://joeschmoe.io/api/v1/random",
       description:
         "Ant Design, a design language for background applications, is refined by Ant UED Team.",
       content: "content"
@@ -136,11 +135,11 @@ export const DashboardAnggota = ({data}) => {
             pageSize: 3,
           }}
           dataSource={state.filtered || state.thedata}
-          footer={
-            <div>
-              <b>ant design</b> footer part
-            </div>
-          }
+          // footer={
+          //   <div>
+          //     <b>ant design</b> footer part
+          //   </div>
+          // }
           renderItem={(item) => (
             <List.Item
               key={item.title}
@@ -151,7 +150,9 @@ export const DashboardAnggota = ({data}) => {
             >
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.avatar} />}
+                  avatar={
+                  <ProfilePicture />
+                }
                   title={<a href={item.href}>{item.name}</a>}
                   description={item.email}
                 />

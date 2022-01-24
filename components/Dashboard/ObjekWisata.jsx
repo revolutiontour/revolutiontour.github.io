@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import { PlusOutlined } from "@ant-design/icons";
 import {Col, Row} from "react-bootstrap"
+import { ObjekWisataIcon } from "../shared/icons/objekwisata";
 
 React.useLayoutEffect = React.useEffect;
 
@@ -113,8 +114,10 @@ export const DashboardObjekWisata = ({data}) => {
             >
               <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.avatar} />}
-                  title={<a href={item.href}>{item.name}</a>}
+                  avatar={
+                  <ObjekWisataIcon/>
+                }
+                  title={<Link href={item.href} as={item.customUrl}>{item.name}</Link>}
                   description={item.desc}
                 />
                 {/* {item.content} */}

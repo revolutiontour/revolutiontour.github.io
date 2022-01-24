@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import Head from "next/head";
 import Layout from "../../../layouts/Layout";
 import {DashboardJadwal} from "../../../components/Dashboard";
@@ -8,16 +8,26 @@ import { tourifyLocal } from "../../../repositories/Repository";
 import { END } from "redux-saga";
 import { wrapper } from "../../../store";
 
-const Jadwal =() =>{
+const Jadwal =({data}) =>{
+  const [loading, setloading] = useState(false)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(listSchedule())
+    setloading(true)
+  }, [])
   const state = useSelector(state => state)
-  
-  var nudata = state.schedule.sAll.map((el,i)=> ({
-    ...el,
-    avatar : "https://joeschmoe.io/api/v1/random",
-    title : `${el.title} #${i+1}`,
-    href : '/dashboard/jadwal/'+ el.tourId.split("TTRDEV")[1]
-  }))
-  return (
+  if(loading){
+    var nudata = state.schedule.sAll?.map((el,i)=> ({
+      ...el,
+      avatar : "https://joeschmoe.io/api/v1/random",
+      title : `${el.title} #${i+1}`,
+      href : '/dashboard/jadwal/detail?id='+el.tourId.split("TTRDEV")[1],
+      customUrl:'/dashboard/jadwal/'+el.tourId.split("TTRDEV")[1],
+    }))
+  }
+  return !loading?
+    <>Loading...</>
+    : (
     <>
       <Head>
         <title>Jadwal</title>
@@ -31,18 +41,24 @@ const Jadwal =() =>{
 
 
 
-export const getStaticProps = wrapper.getStaticProps( store =>
-  async() => {
-    await store.dispatch(listSchedule())
-    await store.dispatch(END)
-    await store.sagaTask.toPromise()
-  if (!store.getState().schedule.sAll) {
-    return {
-      notFound: false,
-    }
-  }
+// export const getStaticProps = wrapper.getStaticProps( store =>
+//   async() => {
+//     store.dispatch(listSchedule())
+//     store.dispatch(END)
+//     await store.sagaTask.toPromise()
+//   if (!store.getState().schedule.sAll) {
+//     return {
+//       notFound: false,
+//     }
+//   }
+//   return {
+//     props:{
+//       data:store.getState().schedule
+//     },
+//     revalidate: 1, // In seconds
+//   }
 
-})
+// })
 
 
  export default Jadwal;

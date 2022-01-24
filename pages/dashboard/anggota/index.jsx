@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import Head from "next/head";
 import Layout from "../../../layouts/Layout";
 import {DashboardAnggota} from "../../../components/Dashboard";
@@ -6,22 +6,33 @@ import { listLeader, listParticipant } from "../../../store/actions/member";
 import { useSelector } from "react-redux";
 import { END } from "redux-saga";
 import { wrapper } from "../../../store";
-
+import { useDispatch } from "react-redux";
 export default function DashboardIndex({data}) {
+  const [loading, setloading] = useState(false)
+  const dispatch = useDispatch()
+  useEffect(() => {
+  dispatch(listParticipant())
+  dispatch(listLeader())
+  setloading(true)
+  }, [])
   const state = useSelector(state => state.member)
-  var nudata = state.participant.map((el,i)=> ({
-    ...el,
-    avatar : "https://joeschmoe.io/api/v1/random",
-    role : 'participant'
-  }))
-  state.leader.map((el,i)=> {
-    nudata.push({
+  if(loading){
+    var nudata = state.participant?.map((el,i)=> ({
       ...el,
-      avatar:"https://joeschmoe.io/api/v1/random",
-      role:'leader'
+      avatar : "https://joeschmoe.io/api/v1/random",
+      role : 'participant'
+    }))
+    state.leader?.map((el,i)=> {
+      nudata.push({
+        ...el,
+        avatar:"https://joeschmoe.io/api/v1/random",
+        role:'leader'
+      })
     })
-  })
-  return (
+  }
+  return !loading?
+    <>Loading...</>
+    : (
     <>
       <Head>
         <title>Anggota</title>
@@ -32,19 +43,26 @@ export default function DashboardIndex({data}) {
     </>
   );
 };
-export const getStaticProps = wrapper.getStaticProps(store =>
-  async() => {
-    await store.dispatch(listParticipant())
-    await store.dispatch(listLeader())
-    await store.dispatch(END)
-    await store.sagaTask.toPromise()
-  if (!store.getState().member.participant) {
-    return {
-      notFound: false,
-    }
-  }
-  // store.dispatch(END)
-})
+// export const getStaticProps = wrapper.getStaticProps(store =>
+//   async() => {
+//     store.dispatch(listParticipant())
+//     store.dispatch(listLeader())
+//     store.dispatch(END)
+//     await store.sagaTask.toPromise()
+//   if (!store.getState().member.participant) {
+//     return {
+//       notFound: false,
+//     }
+//   }
+//   console.log(store.getState().member)
+//   return {
+//     props:{
+//       data:store.getState().member
+//     },
+//     revalidate: 1, // In seconds
+//   }
+//   // store.dispatch(END)
+// })
 // DashboardIndex.getInitialProps = async()=>{
 //   var arrOfObj = await fetch('http://167.172.62.14/api/member/participant')
 //   arrOfObj = await arrOfObj.json()

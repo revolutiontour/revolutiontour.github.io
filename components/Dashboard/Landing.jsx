@@ -29,6 +29,7 @@ import { DashboardLayout } from "./shared/Layout";
 React.useLayoutEffect = React.useEffect;
 
 export const DashboardLanding = () => {
+  const globalState = useSelector(state => state)
   const [state, setstate] = useState({
     openForm: false,
     edit: false,
@@ -36,7 +37,10 @@ export const DashboardLanding = () => {
     record: null
   });
   const [form] = Form.useForm();
-
+  const topFiveObject = globalState.object?.oAll?.slice(-5).reverse()
+  const topFiveSchedule = globalState.schedule?.sAll?.slice(-5).reverse()
+  const topFiveParticipant = globalState.member?.participant?.slice(-5).reverse()
+  console.log(topFiveSchedule)
   const addData = () => {
     setstate({
       ...state,
@@ -58,18 +62,15 @@ export const DashboardLanding = () => {
           <Row>
             <Col xs={12} md={4} className="mb-3 mb-md-0">
               <Card
-                className="text-white rounded-lg"
+                className="text-white text-center rounded-lg"
                 style={{
                   backgroundColor: "#2196f3",
                   border: "none"
                 }}
               >
                 <div className="row">
-                  <div className="col-6 align-self-center text-center">
-                    <span>Logo</span>
-                  </div>
-                  <div className="col-6">
-                    <h1 className="text-white">47</h1>
+                  <div className="col-12">
+                    <h1 className="text-white">{globalState.member?.participant?.length}</h1>
                     <h6 className="text-white">Partisipan bergabung</h6>
                   </div>
                 </div>
@@ -77,18 +78,15 @@ export const DashboardLanding = () => {
             </Col>
             <Col xs={12} md={4} className="mb-3 mb-md-0">
               <Card
-                className="text-white rounded-lg"
+                className="text-white rounded-lg text-center"
                 style={{
                   backgroundColor: "#4cb051",
                   border: "none"
                 }}
               >
               <div className="row">
-                <div className="col-6 align-self-center text-center">
-                  <span>Logo</span>
-                </div>
-                <div className="col-6">
-                  <h1 className="text-white">100</h1>
+                <div className="col-12">
+                  <h1 className="text-white">{globalState.schedule?.sAll?.length}</h1>
                   <h6 className="text-white">Jadwal perjalanan</h6>
                 </div>
               </div>
@@ -96,18 +94,15 @@ export const DashboardLanding = () => {
             </Col>
             <Col xs={12} md={4} className="mb-3 mb-md-0">
               <Card
-                className="text-white rounded-lg"
+                className="text-white rounded-lg text-center"
                 style={{
                   backgroundColor: "#ff9800",
                   border: "none"
                 }}
               >
               <div className="row">
-                <div className="col-6 align-self-center text-center">
-                  <span>Logo</span>
-                </div>
-                <div className="col-6">
-                  <h1 className="text-white">25</h1>
+                <div className="col-12">
+                  <h1 className="text-white">{globalState.object?.oAll?.length}</h1>
                   <h6 className="text-white">Objek Destinasi</h6>
                 </div>
               </div>
@@ -119,22 +114,22 @@ export const DashboardLanding = () => {
           <Row>
             <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Card className="shadow-sm rounded-lg" title="Jadwal Terdekat">
-                {[...Array(3)].map((x, i) => (
+                {topFiveSchedule.map(({title,destination,startDate,endDate}, i) => (
                   <Card.Grid hoverable={false} style={gridStyle}>
-                    <h6>Tour wisata alam</h6>
-                    <p>Destinasi : Gunung Salak</p>
+                    <h6>{title}</h6>
+                    <p>Destinasi : {destination}</p>
                     <div className="row">
                       <div className="col-6 align-self-center">
                         <ScheduleOutlined
                           style={{ verticalAlign: "0.125em" }}
                         />{" "}
-                        <span className="ml-2">Start : 21/ 08/2021</span>
+                        <span className="ml-2">Start : {startDate}</span>
                       </div>
                       <div className="col-6 align-self-center">
                         <ScheduleOutlined
                           style={{ verticalAlign: "0.125em" }}
                         />{" "}
-                        <span className="ml-2">End : 22/ 08/2021</span>
+                        <span className="ml-2">End : {endDate}</span>
                       </div>
                     </div>
                   </Card.Grid>
@@ -143,12 +138,11 @@ export const DashboardLanding = () => {
             </Col>
             <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Card className="shadow-sm rounded-lg" title="Objek Destinasi">
-                {[...Array(3)].map((x, i) => (
+                {topFiveObject.map(({name,desc}, i) => (
                   <Card.Grid hoverable={false} style={gridStyle}>
-                    <h6>Gunung Salak</h6>
+                    <h6>{name}</h6>
                     <p>
-                      Wisata alam dengan pemandangan yang masih penuh dengan
-                      pepohonan
+                      {desc}
                     </p>
                     <p>Link : www.gunungsalak.com</p>
                   </Card.Grid>

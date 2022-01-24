@@ -136,6 +136,7 @@ function* registTLSaga({payload}){
         const regis = yield call(memberRepository.registTourLeader, payload)
         if(regis.responseMessage=="SUCCESS"){
         yield put(registMemberSuccess(regis.data));
+        yield call(getTLSaga)
         modalSuccessRegis('success')
         
         Router.push({
@@ -186,6 +187,7 @@ function* registTPSaga({payload}){
         const regis = yield call(memberRepository.registTourParticipant, payload)
         if(regis.responseMessage=="SUCCESS"){
         yield put(registMemberSuccess(regis.data));
+        yield call(getTPSaga)
         modalSuccessRegis('success')
         
         Router.push({

@@ -50,11 +50,14 @@ export const TambahJadwal = ({data}) => {
       // list["image"] = "";
     } else if (newFile.status === "done") {
       // list["image"] = newFile;
-      storage.ref(`/images/${newFile.name}`).put(newFile)
-  .on("state_changed" , alert("success") , alert);
-  storage.ref(`/images/${newFile.name}`).getDownloadURL()
-  .then((url) => {
-    // Insert url into an <img> tag to "download"
+      const uploadTask = storage.ref(`/schedule/rundown/${newFile.name}`).put(newFile)
+      uploadTask
+      .then(uploadTaskSnapshot => {
+        alert("success")
+        return uploadTaskSnapshot.ref.getDownloadURL();
+      })
+      .then(url  => {
+        
     setstate(
       prev => (
         {
@@ -63,28 +66,7 @@ export const TambahJadwal = ({data}) => {
         }
       )
     )
-  })
-  .catch((error) => {
-    // A full list of error codes is available at
-    // https://firebase.google.com/docs/storage/web/handle-errors
-    switch (error.code) {
-      case 'storage/object-not-found':
-        // File doesn't exist
-        break;
-      case 'storage/unauthorized':
-        // User doesn't have permission to access the object
-        break;
-      case 'storage/canceled':
-        // User canceled the upload
-        break;
-  
-      // ...
-  
-      case 'storage/unknown':
-        // Unknown error occurred, inspect the server response
-        break;
-    }
-  });;
+      }); 
     }
     // console.log(list)
   };
