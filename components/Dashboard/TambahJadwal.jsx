@@ -90,7 +90,7 @@ export const TambahJadwal = ({data}) => {
     formdata.append('objectId', `${params.objectId}`);
     formdata.append('leaderId', `${params.leaderId}`);
     formdata.append('leaderId', `${params.leaderId}`);
-    formdata.append('rundownpath', `${downloadurl}`);
+    formdata.append('rundownPath', `${downloadurl}`);
     dispatch(registTourSchedule(formdata))
 
   }
@@ -103,18 +103,35 @@ export const TambahJadwal = ({data}) => {
           layout="vertical"
           onFinish={onFinish}
         >
-        <Form.Item name="title" label="Nama Acara">
+        <Form.Item name="title" label="Nama Acara"    
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Nama Acara',
+           }]}
+           >
           <Input placeholder="Nama acara yang diselenggarakan" />
         </Form.Item>
-          <Form.Item name="startDate" label="Tanggal Mulai Acara">
+          <Form.Item name="startDate" label="Tanggal Mulai Acara" 
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Mulai Acara',
+           }]}>
           <DatePicker className="w-100"
               placeholder="Pilih tanggal" onChange={onChange} />
           </Form.Item>
-          <Form.Item name="endDate" label="Tanggal Selesai Acara">
+          <Form.Item name="endDate" label="Tanggal Selesai Acara"  
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Tanggal Selesai Acara',
+           }]}>
           <DatePicker className="w-100"
               placeholder="Pilih tanggal" onChange={onChange} />
           </Form.Item>
-          <Form.Item name="objectId" label="Pilih Objek Destinasi">
+          <Form.Item name="objectId" label="Pilih Objek Destinasi"  
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Objek Destinasi',
+           }]}>
             <Select
               showSearch
               placeholder="Pilih Objek Destinasi"
@@ -132,7 +149,11 @@ export const TambahJadwal = ({data}) => {
               }
             </Select>
           </Form.Item>
-          <Form.Item name="leaderId" label="Pilih Tour Leader">
+          <Form.Item name="leaderId" label="Pilih Tour Leader"  
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Tour Leader',
+           }]}>
             <Select
               showSearch
               placeholder="Pilih Tour Leader"
@@ -172,7 +193,7 @@ export const TambahJadwal = ({data}) => {
   </Upload>
       </Form.Item> */}
         
-      <Form.Item label=" " colon={false}>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>

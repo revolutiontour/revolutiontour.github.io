@@ -77,7 +77,7 @@ export const DetailJadwal = ({data}) => {
           </Form.Item>
           
           <Card className="shadow-sm rounded-lg" title="Partisipan :" style={gridStyle}>
-                {data?.participants.map(({id,name}) => (
+                {data?.participants?.map(({id,name}) => (
                   <Card.Grid hoverable={false} style={{width:'100%'}}>
                     <h6>{name}</h6>
                   </Card.Grid>

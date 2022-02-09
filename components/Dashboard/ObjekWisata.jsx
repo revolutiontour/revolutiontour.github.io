@@ -17,14 +17,14 @@ import Link from "next/link";
 import { PlusOutlined } from "@ant-design/icons";
 import {Col, Row} from "react-bootstrap"
 import { ObjekWisataIcon } from "../shared/icons/objekwisata";
+import { List404 } from "./shared/404List";
 
 React.useLayoutEffect = React.useEffect;
-
 export const DashboardObjekWisata = ({data}) => {
 
   const [state, setstate] = useState({
     filtered: null,
-    thedata: data
+    thedata: data.length>0?data:[]
   });
   const filterData = (value) => {
     var { thedata } = state;
@@ -89,6 +89,8 @@ export const DashboardObjekWisata = ({data}) => {
             </Col>
           </Row>
         </Form>
+        {state.thedata.length>0?
+        
         <List
           itemLayout="horizontal"
           size="large"
@@ -96,7 +98,7 @@ export const DashboardObjekWisata = ({data}) => {
             onChange: (page) => {
               console.log(page);
             },
-            pageSize: 3
+            pageSize: 10
           }}
           dataSource={state.filtered || state.thedata}
           // footer={
@@ -125,6 +127,9 @@ export const DashboardObjekWisata = ({data}) => {
             </List.Item>
           )}
         />
+      :
+      <List404/>
+      }
       </DashboardLayout>
     </>
   );

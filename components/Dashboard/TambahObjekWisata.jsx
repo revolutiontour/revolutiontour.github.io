@@ -62,24 +62,40 @@ export const TambahObjekWisata = () => {
           layout="vertical"
           onFinish={onFinish}
         >
-          <Form.Item name="destination" label="Nama Objek Destinasi">
-          <Input name="destination" placeholder="Masukkan nama objek destinasi disini..." defaultValue={destination} onChange={onChange} />
+          <Form.Item name="destination" label="Nama Objek Destinasi"  
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Nama Objek Destinasi',
+           }]}>
+          <Input name="destination" placeholder="Masukkan nama objek destinasi disini..."    
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Nama Objek Destinasi',
+           }]} defaultValue={destination} onChange={onChange} />
           </Form.Item>
-          <Form.Item label="Lokasi Objek Destinasi">
+          <Form.Item label="Lokasi Objek Destinasi"   
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Lokasi Objek Destinasi',
+           }]}>
           <Link href="/dashboard/objek-wisata/map">
           <Button danger={data.map?true:false}>{data.map?"x "+data.map.title:"+ Pilih lokasi"}</Button>
         </Link>
           {/* <Input placeholder="Masukkan lokasi objek destinasi disini..." /> */}
           </Form.Item>
-          <Form.Item name="desc" label="Deskripsi">
-              <TextArea name="desc"  placeholder="Masukkan Deskripsi Objek wisata" rows={4} defaultValue={desc} onChange={onChange} />
+          <Form.Item name="desc" label="Deskripsi"   
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Deskripsi Objek wisata',
+           }]}>
+              <TextArea name="desc"  placeholder="Masukkan Deskripsi Objek wisata" rows={4}  defaultValue={desc} onChange={onChange} />
           </Form.Item>
            
         <Form.Item name="link" label="Link">
           <Input name="link" placeholder="Masukkan Link Objek wisata" defaultValue={link} onChange={onChange}  />
         </Form.Item>
         
-      <Form.Item label=" " colon={false}>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>

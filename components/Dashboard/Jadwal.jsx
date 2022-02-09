@@ -21,6 +21,7 @@ import {
   StarOutlined
 } from "@ant-design/icons";
 import { Jadwal as JadwalIcon } from "../shared/icons";
+import { List404 } from "./shared/404List";
 
 React.useLayoutEffect = React.useEffect;
 
@@ -42,7 +43,7 @@ export const DashboardJadwal = (props) => {
   const { Option } = Select;
 
   const filterDate = (value) => {
-    var thedata = data.filter((user) => user.startDate === value && user);
+    let thedata = data.filter((user) => user.startDate === value && user);
     return thedata;
   };
 
@@ -51,11 +52,11 @@ export const DashboardJadwal = (props) => {
       return setstate((prev) => ({ ...prev, filtered: null }));
     }
 
-    var date = new Date(value);
-    var day = ('0' + date.getDate()).slice(-2)
-    var month = ('0' + date.getMonth() + 1).slice(-2)
-    var year = date.getFullYear();
-    var filtered = filterDate([day, month, year].join("/"));
+    let date = new Date(value);
+    let day = ('0' + date.getDate()).slice(-2)
+    let month = ('0' + date.getMonth() + 1).slice(-2)
+    let year = date.getFullYear();
+    let filtered = filterDate([day, month, year].join("/"));
     setstate((prev) => ({ ...prev, dateString, filtered }));
   };
 
@@ -114,7 +115,7 @@ export const DashboardJadwal = (props) => {
             </div>
           </div>
         </Form>
-
+        {data.length > 0 ? 
         <List
           itemLayout="horizontal"
           size="large"
@@ -122,7 +123,7 @@ export const DashboardJadwal = (props) => {
             // onChange: (page) => {
             //   console.log(page);
             // },
-            pageSize: 3
+            pageSize: 10
           }}
           dataSource={state.filtered || data}
           renderItem={(item) => (
@@ -162,6 +163,10 @@ export const DashboardJadwal = (props) => {
             </List.Item>
           )}
         />
+        :
+        
+      <List404/>
+        }
       </DashboardLayout>
     </>
   );

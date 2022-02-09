@@ -13,17 +13,17 @@ import { compose } from "redux";
 
 export default function D2Objek(){
   const [loading, setloading] = useState(false)
-  const [list, setlist] = useState(null)
+  const dispatch = useDispatch()
+  // const [list, setlist] = useState(null)
   const {query} = useRouter()
   const {id} = query
-  useEffect(async() => {
+  useEffect(() => {
     if(id&&!loading){
-      const res = await fetch('http://167.172.62.14/api/objects/'+id)
-      const resjson = await res.json()
-      setlist(resjson.data)
+      dispatch(detailObject(id))
       setloading(true)
     }
   }, [id,loading])
+  const list = useSelector(state => state.object.oDetail)
   console.log(list)
   return !loading && !list?
   <>Loading...</>

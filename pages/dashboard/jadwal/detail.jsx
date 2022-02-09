@@ -11,17 +11,18 @@ import {useRouter} from 'next/router';
 
 export default function D2Jadwal(){
   const [loading, setloading] = useState(false)
-  const [list, setlist] = useState(null)
+  const dispatch = useDispatch()
+  // const [list, setlist] = useState(null)
   const {query} = useRouter()
   const {id} = query
-  useEffect(async() => {
+  useEffect(() => {
     if(id&&!loading){
-      const res = await fetch('http://167.172.62.14/api/schedule/'+id)
-      const resjson = await res.json()
-      setlist(resjson.data)
+      dispatch(detailSchedule(id))
       setloading(true)
     }
   }, [id,loading])
+  
+  const list = useSelector(state => state.schedule.sDetail)
   console.log(list)
   return !loading && !list?
   <>Loading...</>

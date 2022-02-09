@@ -48,16 +48,32 @@ const TbhAnggota = () => {
           layout="vertical"
           onFinish={onFinish}
         >
-          <Form.Item name="name" label="Nama lengkap">
+          <Form.Item name="name" label="Nama lengkap"    
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Nama Lengkap',
+           }]}>
           <Input placeholder="input placeholder" />
           </Form.Item>
-          <Form.Item name="phone" label="No. HP">
+          <Form.Item name="phone" label="No. HP"    
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi No. Hp',
+           }]}>
           <Input placeholder="input placeholder" />
           </Form.Item>
-          <Form.Item name="email" label="Alamat email">
+          <Form.Item name="email" label="Alamat email"   
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Email',
+           }]}>
           <Input placeholder="input placeholder" />
           </Form.Item>
-          <Form.Item name="role" label="Role">
+          <Form.Item name="role" label="Role"   
+          rules={[{ 
+            required: true,
+            message: 'Mohon diisi Role',
+           }]}>
           <Radio.Group
             // onChange={filterRole}
             // value={role}
@@ -68,7 +84,7 @@ const TbhAnggota = () => {
             </Radio.Group>
           </Form.Item>
         
-      <Form.Item label=" " colon={false}>
+      <Form.Item >
         <Button type="primary" htmlType="submit">
           Submit
         </Button>

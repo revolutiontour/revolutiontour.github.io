@@ -41,7 +41,11 @@ export const DashboardPendaftaran = ({data}) => {
           layout="vertical"
           onFinish={onFinish}
         >
-        <Form.Item name="scheduleId" label="Jadwal">
+        <Form.Item name="scheduleId" label="Jadwal"
+          rules={[{ 
+            required: true,
+            message: 'Mohon Dipilih Jadwal',
+           }]}>
           <Select
             showSearch
             placeholder="Pilih Jadwal"
@@ -59,7 +63,11 @@ export const DashboardPendaftaran = ({data}) => {
             )}
           </Select>
         </Form.Item>
-          <Form.Item name="participantId" label="Partisipan">
+          <Form.Item name="participantId" label="Partisipan"
+          rules={[{ 
+            required: true,
+            message: 'Mohon Dipilih Partisipan',
+           }]}>
             <Select
               showSearch
               placeholder="Pilih Partisipan"

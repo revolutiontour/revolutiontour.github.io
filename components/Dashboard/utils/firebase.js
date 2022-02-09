@@ -1,15 +1,16 @@
 import firebase from 'firebase';
 import 'firebase/storage'; 
 const firebaseConfig = {
-  apiKey: "AIzaSyBi0aU79uJsu83R8ralfh0oALfpeiBdTcY",
-  authDomain: "tour-travel-2266a.firebaseapp.com",
-  databaseURL: "https://tour-travel-2266a-default-rtdb.firebaseio.com",
-  projectId: "tour-travel-2266a",
-  storageBucket: "tour-travel-2266a.appspot.com",
-  messagingSenderId: "792156926724",
-  appId: "1:792156926724:web:929392130fb86b2a601651",
-  measurementId: "G-XL55B413ZW"
+  apiKey: "AIzaSyB1SQ3Dmv00cg8CAySLtxSMsarDdmjCIg4",
+  authDomain: "tour-travel-revolution.firebaseapp.com",
+  databaseURL: "https://tour-travel-revolution-default-rtdb.firebaseio.com",
+  projectId: "tour-travel-revolution",
+  storageBucket: "tour-travel-revolution.appspot.com",
+  messagingSenderId: "802983505583",
+  appId: "1:802983505583:web:5cb001a9049afa9b7dae5a",
+  measurementId: "G-4LG3G0JGN3"
 };
+
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }

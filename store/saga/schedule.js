@@ -1,4 +1,4 @@
-import { all, put, takeEvery, call } from 'redux-saga/effects';
+import { all, put, takeEvery, call, select } from 'redux-saga/effects';
 import { notification,message } from 'antd';
 
 import { actionTypes, detailScheduleSuccess, listSchedule, listScheduleSuccess, registTourGroupScheduleSuccess } from '../actions/schedule';
@@ -60,16 +60,30 @@ function* detailScheduleSaga({payload}) {
                 pathname: '/dashboard',
             });
         } else {
-            if (schedule.responseMessage==="SUCCESS") {
+            if (schedule.responseCode==="0000") {
                 yield put(detailScheduleSuccess(schedule.data));
                 // Router.push({
                 //     pathname: '/dashboard',
                 // });
-            } else {
-                modalFailed('error',schedule.responseMessage);
-                Router.push({
-                    pathname: '/dashboard',
-                });
+            } else if(schedule.responseCode==="0003") {
+                const getAllScheduleState = (state) => state.schedule.sAll
+                const getSchedule = yield select(getAllScheduleState)
+                let scheduleData = getSchedule.filter((el)=>
+                    {
+                        return el.tourId === `TTRDEV${payload}`&&
+                        (el)
+                    }
+                    )
+                yield put(detailScheduleSuccess(scheduleData[0]));
+                // Router.push({
+                //     pathname: '/dashboard',
+                // });
+            }else {
+                
+            modalFailed('error','');
+            Router.push({
+                pathname: '/dashboard',
+            });
             }
         }
     } catch (err) {
@@ -79,7 +93,6 @@ function* detailScheduleSaga({payload}) {
 
 function* registTourGroupScheduleSaga({payload}) {
     console.log('regist Tour Group Schedule')
-    const dispatch = useDispatch();
     try {
         const schedule = yield call(scheduleRepository.registTourGroupSchedule,payload);
         if (!schedule) {

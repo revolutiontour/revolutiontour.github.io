@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { listLeader } from "../../store/actions/member";
 import { useSelector } from "react-redux";
 import { ProfilePicture } from "../shared/icons";
+import { List404 } from "./shared/404List";
 
 React.useLayoutEffect = React.useEffect;
 
@@ -49,10 +50,11 @@ export const DashboardAnggota = ({data}) => {
   const [state, setstate] = useState({
     filtered: null,
     role:"participant",
-    thedata:data.filter((user)=>user.role==='participant'&&user)
+    // thedata:[]
+    thedata:data.length>0?data.filter((user)=>user.role==='participant'&&user):[]
   });
   const filterData = (value) => {
-      var{thedata} = state
+      let{thedata} = state
       return thedata.filter((user) => {
       return (
         (user.name.toLowerCase().search(value.toLowerCase()) != -1 ||
@@ -63,13 +65,13 @@ export const DashboardAnggota = ({data}) => {
   
   const filterRole = (e) => {
     const { value } = e.target;
-    var thedata = data.filter((user)=>user.role===value&&user);
+    let thedata = data.filter((user)=>user.role===value&&user);
     setstate(prev=>({...prev,thedata,role:value}))
   };
   const { Option } = Select;
   const onChange = (e) => {
     const { value } = e.target;
-    var filtered = ''
+    let filtered = ''
     filtered = filterData(value);
 
     setstate((prev) => ({
@@ -125,6 +127,7 @@ export const DashboardAnggota = ({data}) => {
                 </Col>
           </Row>
         </Form>
+        {state.thedata.length>0?
         <List
           itemLayout="horizontal"
           size="large"
@@ -132,7 +135,7 @@ export const DashboardAnggota = ({data}) => {
             // onChange: (page) => {
             //   console.log(page);
             // },
-            pageSize: 3,
+            pageSize: 10,
           }}
           dataSource={state.filtered || state.thedata}
           // footer={
@@ -161,6 +164,9 @@ export const DashboardAnggota = ({data}) => {
             </List.Item>
           )}
         />
+        :
+        <List404/>
+        }
       </DashboardLayout>
     </>
   );
