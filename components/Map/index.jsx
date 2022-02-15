@@ -6,12 +6,12 @@ import { Select, Form, Input, Button, Row, Col, DatePicker, List } from "antd";
 import { DashboardLayout } from "../Dashboard/shared/Layout";
 import objectRepository from "../../repositories/objectRepository";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { registMapObjectSuccess } from "../../store/actions/object";
+import { registMapObjectSuccess } from "../../context/object/action";
 import Router from 'next/router'
+import { withContext } from "../../context/context";
 
-export default function Map() {
-  const dispatch = useDispatch()
+
+function Map({dispatch}) {
   const [state, setstate] = useState({
     lat: 106.79855,
     lng: -6.21853,
@@ -105,3 +105,4 @@ export default function Map() {
     </>
   );
 }
+export default withContext(Map)

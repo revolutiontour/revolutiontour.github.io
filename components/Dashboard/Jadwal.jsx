@@ -115,7 +115,7 @@ export const DashboardJadwal = (props) => {
             </div>
           </div>
         </Form>
-        {data.length > 0 ? 
+        {data?.length > 0 ? 
         <List
           itemLayout="horizontal"
           size="large"

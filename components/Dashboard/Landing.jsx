@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import {
   Table,
@@ -22,14 +22,12 @@ import {
   UserAddOutlined,
   TeamOutlined
 } from "@ant-design/icons";
-import ModalForm from "./shared/ModalForm";
-import { useSelector, useDispatch } from "react-redux";
-import DashboardTable from "./shared/Table";
 import { DashboardLayout } from "./shared/Layout";
+import { GetRootContext } from "../../context/context";
 React.useLayoutEffect = React.useEffect;
 
 export const DashboardLanding = () => {
-  const globalState = useSelector(state => state)
+  const {state:globalState,dispatch}= GetRootContext()
   const [state, setstate] = useState({
     openForm: false,
     edit: false,
@@ -114,7 +112,7 @@ export const DashboardLanding = () => {
           <Row>
             <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Card className="shadow-sm rounded-lg" title="Jadwal Terdekat">
-                {topFiveSchedule.map(({title,destination,startDate,endDate}, i) => (
+                {topFiveSchedule?.map(({title,destination,startDate,endDate}, i) => (
                   <Card.Grid hoverable={false} style={gridStyle}>
                     <h6>{title}</h6>
                     <p>Destinasi : {destination}</p>
@@ -138,7 +136,7 @@ export const DashboardLanding = () => {
             </Col>
             <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Card className="shadow-sm rounded-lg" title="Objek Destinasi">
-                {topFiveObject.map(({name,desc}, i) => (
+                {topFiveObject?.map(({name,desc}, i) => (
                   <Card.Grid hoverable={false} style={gridStyle}>
                     <h6>{name}</h6>
                     <p>

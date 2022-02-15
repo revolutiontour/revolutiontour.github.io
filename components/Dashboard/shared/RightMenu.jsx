@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Menu, Icon } from "antd";
 import { useRouter } from "next/router";
-import { useSelector, useDispatch } from "react-redux";
 import { logoutMemberSuccess } from "../../../store/actions/member";
 import Link from "next/link";
 import {
@@ -11,19 +10,20 @@ import {
   UserAddOutlined,
   TeamOutlined
 } from "@ant-design/icons";
+import { GetRootContext } from "../../../context/context";
 
 export default function RightMenu() {
-  const isLogged = useSelector((state) => state.member.success);
+  const {state,dispatch} = GetRootContext()
+  const isLogged = state.member.success
 
   const Logout = () => {
-    dispatch(logoutMemberSuccess());
+    logoutMemberSuccess()(dispatch)
     push("/users/login");
   };
   const SubMenu = Menu.SubMenu;
   const MenuItemGroup = Menu.ItemGroup;
 
   const { pathname, push } = useRouter();
-  const dispatch = useDispatch();
   const menu = [
     {
       url: "/dashboard",

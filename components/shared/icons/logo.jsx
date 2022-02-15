@@ -1,4 +1,4 @@
-export const TourifyLogo = ({width="108"})=>(
+export const TourifyLogoBig = ({width="108"})=>(
     <svg width={width} height={width} viewBox="0 0 108 109" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_590_184)">
 <rect x="7" y="7" width="88" height="88.2322" rx="15" fill="#FF730E"/>

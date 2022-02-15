@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { DashboardLayout } from "./shared/Layout";
 import { Select, Form,Input,Button, Row, Col, DatePicker,Radio } from "antd";
-import { useDispatch,useSelector } from "react-redux";
-import { registTourLeader, registTourParticipant } from "../../store/actions/member";
-import { connect } from "react-redux";
+import { registTourLeader, registTourParticipant } from "../../context/member/action";
+import { withContext } from "../../context/context";
 
 React.useLayoutEffect = React.useEffect;
-const TbhAnggota = () => {
-  const dispatch = useDispatch();
+const TbhAnggota = ({state,dispatch}) => {
   const { Option } = Select;
   const onChange = (value) => {
     console.log(`selected ${value}`);
@@ -34,9 +32,9 @@ const TbhAnggota = () => {
     formdata.append('name', `${values.name}`);
     formdata.append('phone', `${values.phone}`);
     if(role==="participant"){
-      dispatch(registTourParticipant(formdata))
+      registTourParticipant(formdata)(dispatch)
     }else{
-      dispatch(registTourLeader(formdata))
+      registTourLeader(formdata)(dispatch)
     }
     console.log('Success:', values);
   };
@@ -101,4 +99,4 @@ const TbhAnggota = () => {
 //   registTourLeader,
 //   registTourParticipant
 //  };
-export const TambahAnggota = TbhAnggota
+export const TambahAnggota = withContext(TbhAnggota)

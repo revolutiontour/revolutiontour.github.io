@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Layout from "../../../layouts/Layout";
 import {TambahAnggota} from "../../../components/Dashboard";
 
 export default function DashboardIndex() {

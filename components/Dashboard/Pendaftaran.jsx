@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { DashboardLayout } from "./shared/Layout";
 import { Select, Form,Input,Button, Row, Col, DatePicker } from "antd";
-import { useDispatch } from "react-redux";
-import { registTourGroupSchedule, registTourSchedule } from "../../store/actions/schedule";
+import { registTourGroupSchedule, registTourSchedule } from "../../context/schedule/action";
+import { GetRootContext } from "../../context/context";
 React.useLayoutEffect = React.useEffect;
 
 export const DashboardPendaftaran = ({data}) => {
-  const dispatch = useDispatch();
+  const {dispatch} = GetRootContext()
   const {schedule,participant} = data
   console.log(data)
   const { Option } = Select;
@@ -19,7 +19,7 @@ export const DashboardPendaftaran = ({data}) => {
     var formdata = new FormData();
     formdata.append('participantId', `${values.participantId}`);
     formdata.append('scheduleId', `${values.scheduleId}`);
-    dispatch(registTourGroupSchedule(formdata))
+    registTourGroupSchedule(formdata)(dispatch)
   }
 
   const onBlur = () => {

@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { DashboardLayout } from "./shared/Layout";
 import { Select, Form,Input,Button, Row, Col, DatePicker  } from "antd";
 import Link from 'next/link'
-import { useDispatch,useSelector } from "react-redux";
-import { currentObject, registObject } from "../../store/actions/object";
+import { currentObject, registObject } from "../../context/object/action";
+import { GetRootContext } from "../../context/context";
 
 React.useLayoutEffect = React.useEffect;
 
 export const TambahObjekWisata = () => {
+  const context = GetRootContext()
   const [state,setstate] = useState({})
-  const data = useSelector(state => state.object.CurrentData)
+  const data = context.state.object.CurrentData
   const {destination,desc,link} = data
-  const dispatch = useDispatch()
+  const dispatch = context.dispatch
   console.log(data)
   const { TextArea } = Input;
   const { Option } = Select;
@@ -21,12 +22,12 @@ export const TambahObjekWisata = () => {
       ...prev,
       [name]:value
     }))
-    dispatch(currentObject(
+    currentObject(
       {
         ...data,
         [name]:value
       }
-    ))
+    )(dispatch)
   };
 
   const onBlur = () => {
@@ -51,7 +52,7 @@ export const TambahObjekWisata = () => {
     formdata.append('link', `${link}`);
     formdata.append('lat', `${lat}`);
     formdata.append('lon', `${lng}`);
-    dispatch(registObject(formdata))
+    registObject(formdata)(dispatch)
     // console.log('Success:', data);
   };
   return (

@@ -1,23 +1,18 @@
 import React, { useEffect,useState } from "react";
 import Head from "next/head";
-import Layout from "../../layouts/Layout";
 import {DashboardPendaftaran} from "../../components/Dashboard";
-import { listSchedule } from "../../store/actions/schedule";
-import { listParticipant } from "../../store/actions/member";
-import { END } from "redux-saga";
-import { wrapper } from "../../store";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { listSchedule } from "../../context/schedule/action";
+import { listParticipant } from "../../context/member/action";
+import { GetRootContext } from "../../context/context";
 
 export default function DashboardIndex({data}) { 
   const [loading, setloading] = useState(false)
-  const dispatch = useDispatch()
+  const {state,dispatch} = GetRootContext()
   useEffect(() => {
-    dispatch(listSchedule())
-    dispatch(listParticipant())
+    listSchedule()(dispatch)
+    listParticipant()(dispatch)
     setloading(true)
   }, [])
-  const state = useSelector(state => state)
   if(loading){
 
     const schedule = state.schedule.sAll?.map((el,i) =>({

@@ -23,18 +23,18 @@ import {
   UserAddOutlined,
   TeamOutlined
 } from "@ant-design/icons";
-import ModalForm from "./ModalForm";
-import { useSelector, useDispatch } from "react-redux";
 import { DashboardSidebar } from "./Sidebar";
 import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
 import Head from "next/head";
+import { GetRootContext } from "../../../context/context";
 
 React.useLayoutEffect = React.useEffect;
 
 export const DashboardLayout = ({ children }) => {
   const { push } = useRouter();
-  const isLogged = useSelector((state) => state.member.success);
+  const {state:{member}} = GetRootContext()
+  const isLogged = member.success;
   const [state, setstate] = useState({
     openForm: false,
     edit: false,

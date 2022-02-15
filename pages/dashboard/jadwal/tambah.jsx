@@ -1,21 +1,35 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import Head from "next/head";
-import Layout from "../../../layouts/Layout";
 import {TambahJadwal} from "../../../components/Dashboard";
-import { useSelector } from "react-redux";
-import { listLeader } from "../../../store/actions/member";
-import { END } from "redux-saga";
-import { wrapper } from "../../../store";
-import { listObject } from "../../../store/actions/object";
+import { listLeader } from "../../../context/member/action";
+import { listObject } from "../../../context/object/action";
+import { withContext } from "../../../context/context";
+import {useRouter} from "next/router";
 
-export default function AddJadwal() {
-  const state = useSelector(state => state)
-  var data = {
-    object:state.object.oAll,
-    leader:state.member.leader
+function AddJadwal({state,dispatch}) {
+  const [loading, setloading] = useState(false)
+  const router = useRouter()
+  useEffect(() => {
+    listObject()(dispatch)
+    listLeader()(dispatch)
+    setloading(true)
+  }, [])
+
+  if(loading){
+    if(!state.object.oAll || !state.member.leader){
+    router.push({
+      pathname:"/404"
+    })
   }
-
-  return (
+    var data = {
+      object:state.object?.oAll,
+      leader:state.member?.leader
+    }
+  }
+return !loading?
+<>Loading...</>
+:
+(
     <>
       <Head>
         <title>Tambah Jadwal</title>
@@ -26,17 +40,5 @@ export default function AddJadwal() {
     </>
   );
 };
+export default withContext(AddJadwal)
 
-export const getStaticProps = wrapper.getStaticProps( store =>
-  async() => {
-    store.dispatch(listObject())
-    store.dispatch(listLeader())
-    store.dispatch(END)
-
-    await store.sagaTask.toPromise()
-  if (!store.getState().object.oAll || !store.getState().member.leader) {
-    return {
-      notFound: true,
-    }
-  }
-})

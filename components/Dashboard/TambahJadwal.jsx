@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DashboardLayout } from "./shared/Layout";
 import { Select, Form,Input,Button, Row, Col, DatePicker, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 React.useLayoutEffect = React.useEffect;
 import storage from "./utils/firebase"
-import { useDispatch } from "react-redux";
-import { registTourSchedule } from "../../store/actions/schedule";
+import { registTourSchedule } from "../../context/schedule/action";
+import { GetRootContext } from "../../context/context";
 
 export const TambahJadwal = ({data}) => {
-  const dispatch = useDispatch()
+  const {dispatch} = GetRootContext()
   const [state,setstate]= useState(
     {
       downloadurl:null
@@ -91,7 +91,7 @@ export const TambahJadwal = ({data}) => {
     formdata.append('leaderId', `${params.leaderId}`);
     formdata.append('leaderId', `${params.leaderId}`);
     formdata.append('rundownPath', `${downloadurl}`);
-    dispatch(registTourSchedule(formdata))
+    registTourSchedule(formdata)(dispatch)
 
   }
   console.log("download url :",state.downloadurl)

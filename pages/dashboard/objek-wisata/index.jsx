@@ -1,28 +1,22 @@
 import React, { useEffect,useState } from "react";
 import Head from "next/head";
-import Layout from "../../../layouts/Layout";
 import {DashboardObjekWisata} from "../../../components/Dashboard";
-import { listObject } from "../../../store/actions/object";
-import { END } from "redux-saga";
-import { wrapper } from "../../../store";
-import { useSelector } from "react-redux";
-import { tourifyLocal } from "../../../repositories/Repository";
-import { useDispatch } from "react-redux";
+import { listObject } from "../../../context/object/action";
+import { withContext } from "../../../context/context";
 
-export default function ObjekWisata({data=[]}) {
+function ObjekWisata({state:RootState,dispatch}) {
   const [loading, setloading] = useState(false)
-  const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(listObject())
+    listObject()(dispatch)
     setloading(true)
   }, [])
-  const state = useSelector(state => state.object)
+  const TheState = RootState.object
   if(loading){
 
-    var nudata = state.oAll?.map((el,i) =>({...el,
+    var nudata = TheState.oAll?.map((el,i) =>({...el,
       href:'/dashboard/objek-wisata/detail?id='+el.id,
       customUrl:'/dashboard/objek-wisata/'+el.id,
-      avatar:"https://joeschmoe.io/api/v1/random"}))
+    }))
   }
     return !loading?
     <>Loading...</>
@@ -38,6 +32,8 @@ export default function ObjekWisata({data=[]}) {
     </>
   );
 };
+
+export default withContext(ObjekWisata)
 
 // export const getStaticProps = wrapper.getStaticProps( store =>
 //   async() => {

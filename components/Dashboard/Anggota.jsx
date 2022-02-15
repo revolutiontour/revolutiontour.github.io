@@ -15,9 +15,6 @@ import {
 } from "antd";
 import {Col, Row} from "react-bootstrap"
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { listLeader } from "../../store/actions/member";
-import { useSelector } from "react-redux";
 import { ProfilePicture } from "../shared/icons";
 import { List404 } from "./shared/404List";
 
@@ -51,7 +48,7 @@ export const DashboardAnggota = ({data}) => {
     filtered: null,
     role:"participant",
     // thedata:[]
-    thedata:data.length>0?data.filter((user)=>user.role==='participant'&&user):[]
+    thedata:data?.length>0?data.filter((user)=>user.role==='participant'&&user):[]
   });
   const filterData = (value) => {
       let{thedata} = state

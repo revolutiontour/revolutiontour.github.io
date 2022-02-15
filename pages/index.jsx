@@ -19,7 +19,7 @@ import {
 import { CustomSlider } from "../components/Landing";
 import { InputGroup, FormControl } from "react-bootstrap";
 import objectRepository from "../repositories/objectRepository"
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 export default function Home() {
   const [getLoc, setgetLoc] = useState(null)
@@ -28,17 +28,19 @@ const currentDate = date.toLocaleDateString('en-GB', {
   day: '2-digit', month: 'long', year: 'numeric'
 }).replace(/ /g, ' ');
 
-if(!getLoc){
-  navigator.geolocation.getCurrentPosition(async function(position) {
-    let getloc = await objectRepository.getCurrentLoc({
-      lat:position.coords.latitude,
-      long:position.coords.longitude
-    })
-    console.log(getloc)
-    setgetLoc(getloc.items[0].address.city)
-  });
-}
-console.log(getLoc)
+useEffect(() => {
+  if(!getLoc){
+    navigator?.geolocation.getCurrentPosition(async function(position) {
+      let getloc = await objectRepository.getCurrentLoc({
+        lat:position.coords.latitude,
+        long:position.coords.longitude
+      })
+      console.log(getloc)
+      setgetLoc(getloc.items[0].address.city)
+    });
+  }
+  console.log(getLoc)
+}, []);
 
   return (
     <>

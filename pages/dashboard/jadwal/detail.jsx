@@ -1,28 +1,23 @@
 import React, { useEffect,useState } from "react";
 import Head from "next/head";
-import Layout from "../../../layouts/Layout";
 import {DetailJadwal} from "../../../components/Dashboard";
-import { detailSchedule } from "../../../store/actions/schedule";
-import { END } from "redux-saga";
-import { wrapper } from "../../../store";
-import { connect, useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { detailSchedule } from "../../../context/schedule/action";
 import {useRouter} from 'next/router';
+import { withContext } from "../../../context/context";
 
-export default function D2Jadwal(){
+function D2Jadwal({state,dispatch}){
   const [loading, setloading] = useState(false)
-  const dispatch = useDispatch()
   // const [list, setlist] = useState(null)
   const {query} = useRouter()
   const {id} = query
   useEffect(() => {
     if(id&&!loading){
-      dispatch(detailSchedule(id))
+      detailSchedule(id)({state,dispatch})
       setloading(true)
     }
   }, [id,loading])
   
-  const list = useSelector(state => state.schedule.sDetail)
+  const list = state.schedule.sDetail
   console.log(list)
   return !loading && !list?
   <>Loading...</>
@@ -37,4 +32,5 @@ export default function D2Jadwal(){
     </>
   );
 }
+export default withContext(D2Jadwal)
 

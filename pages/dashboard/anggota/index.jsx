@@ -1,23 +1,18 @@
 import React, { useEffect,useState } from "react";
 import Head from "next/head";
-import Layout from "../../../layouts/Layout";
 import {DashboardAnggota} from "../../../components/Dashboard";
-import { listLeader, listParticipant } from "../../../store/actions/member";
-import { useSelector } from "react-redux";
-import { END } from "redux-saga";
-import { wrapper } from "../../../store";
-import { useDispatch } from "react-redux";
-export default function DashboardIndex({data}) {
+import { listLeader, listParticipant } from "../../../context/member/action";
+import { withContext } from "../../../context/context";
+function DashboardIndex({state:RootState,dispatch}) {
   const [loading, setloading] = useState(false)
-  const dispatch = useDispatch()
   useEffect(() => {
-  dispatch(listParticipant())
-  dispatch(listLeader())
+  listParticipant()(dispatch)
+  listLeader()(dispatch)
   setloading(true)
   }, [])
-  const state = useSelector(state => state.member)
+  const state = RootState.member
   if(loading){
-    var nudata = state.participant?.map((el,i)=> ({
+    let nudata = state.participant?.map((el,i)=> ({
       ...el,
       avatar : "https://joeschmoe.io/api/v1/random",
       role : 'participant'
@@ -43,6 +38,7 @@ export default function DashboardIndex({data}) {
     </>
   );
 };
+export default withContext(DashboardIndex)
 // export const getStaticProps = wrapper.getStaticProps(store =>
 //   async() => {
 //     store.dispatch(listParticipant())

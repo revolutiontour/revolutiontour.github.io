@@ -2,7 +2,6 @@ import React from "react";
 import Head from "next/head";
 import Layout from "../../../layouts/Layout";
 import {TambahObjekWisata} from "../../../components/Dashboard";
-import { useSelector } from "react-redux";
 export default function TambahWisata() {
   return (
     <>

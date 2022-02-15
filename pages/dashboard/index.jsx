@@ -2,23 +2,19 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Layout from "../../layouts/Layout";
 import {DashboardLanding} from "../../components/Dashboard";
-import withReduxSaga from "next-redux-saga";
-import { useDispatch, useSelector } from "react-redux";
-import { listLeader, listParticipant } from "../../store/actions/member";
-import { listSchedule } from "../../store/actions/schedule";
-import { listObject } from "../../store/actions/object";
+import { listLeader, listParticipant } from "../../context/member/action";
+import { listSchedule } from "../../context/schedule/action";
+import { listObject } from "../../context/object/action";
+import { withContext } from "../../context/context";
 
-export default function DashboardIndex() {
+function DashboardIndex({state,dispatch}) {
   const [loading, setloading] = useState(false)
-  const dispatch = useDispatch()
   useEffect(() => {
-  dispatch(listParticipant())
-  dispatch(listSchedule())
-  dispatch(listObject())
+  listParticipant()(dispatch)
+  listSchedule()(dispatch)
+  listObject()(dispatch)
   setloading(true)
   }, [])
-  
-  const state = useSelector(state => state)
   
   return !loading?
   <>Loading...</>
@@ -33,4 +29,6 @@ export default function DashboardIndex() {
     </>
   );
 };
+
+export default withContext(DashboardIndex)
 

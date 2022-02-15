@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import Login from "../../components/Login/Login";
 import Layout from "../../layouts/Layout";
 import Head from "next/head";
-import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-const index = () => {
-  const isLogged = useSelector((state) => state.member.success);
+import { withContext } from "../../context/context";
+
+const index = ({state}) => {
+  const isLogged = state.member.success;
   const { push } = useRouter();
   useEffect(() => {
     if (isLogged) {
@@ -30,4 +31,4 @@ const index = () => {
   }
 };
 
-export default index;
+export default withContext(index);

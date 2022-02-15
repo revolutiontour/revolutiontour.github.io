@@ -3,15 +3,14 @@ import { Row,Col } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Navbar,Container,Nav,Offcanvas,NavDropdown,Button } from 'react-bootstrap';
-import { useSelector, useDispatch } from "react-redux";
+import { GetRootContext } from '../../context/context';
 import { LogoutUser } from '../../store/actions/UserActions';
 import { TourifyLogo } from '../shared/icons';
 
 export const CustomNav = () => {
-    
+  const {state,dispatch} = GetRootContext()
   const { pathname, push } = useRouter();
-  const isLogged = useSelector((state) => state.member.success);
-  const dispatch = useDispatch();
+  const isLogged = state.member.success;
   const menu = [
     {
       url: "/",

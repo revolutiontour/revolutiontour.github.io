@@ -1,21 +1,15 @@
 import React, { useEffect,useState } from "react";
 import Head from "next/head";
-import Layout from "../../../layouts/Layout";
 import {DashboardJadwal} from "../../../components/Dashboard";
-import { listSchedule } from "../../../store/actions/schedule";
-import { connect, useSelector,useDispatch } from "react-redux";
-import { tourifyLocal } from "../../../repositories/Repository";
-import { END } from "redux-saga";
-import { wrapper } from "../../../store";
+import { listSchedule } from "../../../context/schedule/action";
+import { withContext } from "../../../context/context";
 
-const Jadwal =({data}) =>{
+const Jadwal =({state,dispatch}) =>{
   const [loading, setloading] = useState(false)
-  const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(listSchedule())
+    listSchedule()(dispatch)
     setloading(true)
   }, [])
-  const state = useSelector(state => state)
   if(loading){
     var nudata = state.schedule.sAll?.map((el,i)=> ({
       ...el,
@@ -61,4 +55,4 @@ const Jadwal =({data}) =>{
 // })
 
 
- export default Jadwal;
+ export default withContext(Jadwal);
