@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DashboardLayout } from "./shared/Layout";
 import { Select, Form,Input,Button, Row, Col, DatePicker } from "antd";
 import { registTourGroupSchedule, registTourSchedule } from "../../context/schedule/action";
-import { GetRootContext } from "../../context/context";
-React.useLayoutEffect = React.useEffect;
+import { GetRootContext, RootContext } from "../../context/context";
 
 export const DashboardPendaftaran = ({data}) => {
-  const {dispatch} = GetRootContext()
+  const {dispatch} = useContext(RootContext)
   const {schedule,participant} = data
   console.log(data)
   const { Option } = Select;
@@ -58,7 +57,7 @@ export const DashboardPendaftaran = ({data}) => {
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
-            {schedule.map(({id,title})=>
+            {schedule?.map(({id,title})=>
             <Option value={id}>{title}</Option>
             )}
           </Select>
@@ -80,7 +79,7 @@ export const DashboardPendaftaran = ({data}) => {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-              {participant.map(({id,name})=>
+              {participant?.map(({id,name})=>
               <Option value={id}>{name}</Option>
               )}
             </Select>

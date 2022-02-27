@@ -23,8 +23,6 @@ import {
 import { Jadwal as JadwalIcon } from "../shared/icons";
 import { List404 } from "./shared/404List";
 
-React.useLayoutEffect = React.useEffect;
-
 export const DashboardJadwal = (props) => {
   console.log(props)
   const {data} = props
@@ -165,7 +163,7 @@ export const DashboardJadwal = (props) => {
         />
         :
         
-      <List404/>
+        <List404 msg="Jadwal Tour"/>
         }
       </DashboardLayout>
     </>

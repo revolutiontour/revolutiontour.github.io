@@ -18,8 +18,6 @@ import Link from "next/link";
 import { ProfilePicture } from "../shared/icons";
 import { List404 } from "./shared/404List";
 
-React.useLayoutEffect = React.useEffect;
-
 export const DashboardAnggota = ({data}) => {
   const listData = [];
   for (let i = 0; i < 23; i++) {
@@ -162,7 +160,7 @@ export const DashboardAnggota = ({data}) => {
           )}
         />
         :
-        <List404/>
+        <List404 msg="Anggota"/>
         }
       </DashboardLayout>
     </>

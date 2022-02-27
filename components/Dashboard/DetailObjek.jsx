@@ -22,8 +22,6 @@ import {
   StarOutlined
 } from "@ant-design/icons";
 
-React.useLayoutEffect = React.useEffect;
-
 export const DetailObjek = ({data=null}) => {
 
   const { Option } = Select;

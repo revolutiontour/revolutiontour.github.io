@@ -31,7 +31,7 @@ export default function DashboardIndex({data}) {
       <Head>
         <title>Pendaftaran</title>
         <meta name="description" content="Register | Tourify" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/favicon.ico" />
       </Head>
         <DashboardPendaftaran data={data} />
     </>

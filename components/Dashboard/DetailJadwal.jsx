@@ -22,8 +22,6 @@ import {
   StarOutlined
 } from "@ant-design/icons";
 
-React.useLayoutEffect = React.useEffect;
-
 export const DetailJadwal = ({data}) => {
 
 
@@ -81,7 +79,7 @@ export const DetailJadwal = ({data}) => {
                   <Card.Grid hoverable={false} style={{width:'100%'}}>
                     <h6>{name}</h6>
                   </Card.Grid>
-                ))}
+                ))||<p>Belum ada partisipan</p>}
               </Card>
         
       {/* <Form.Item label=" " colon={false}>

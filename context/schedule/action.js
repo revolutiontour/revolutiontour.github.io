@@ -138,10 +138,10 @@ export const actionTypes = {
       payload: data,
     };
   };
-  export const registTourGroupSchedule = (payload) => {
+  export const registTourGroupSchedule = (payload) => async (dispatch) => {
     console.log('regist Tour Group Schedule')
     try {
-        const schedule = scheduleRepository.registTourGroupSchedule(payload);
+        const schedule = await scheduleRepository.registTourGroupSchedule(payload);
         if (!schedule) {
             modalFailed('error','');
         } else {

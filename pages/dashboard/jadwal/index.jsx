@@ -26,7 +26,7 @@ const Jadwal =({state,dispatch}) =>{
       <Head>
         <title>Jadwal</title>
         <meta name="description" content="Tourify Jadwal" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/api/admin/favicon.ico" />
       </Head>
         <DashboardJadwal data={nudata}/>
     </>

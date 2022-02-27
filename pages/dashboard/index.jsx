@@ -23,7 +23,7 @@ function DashboardIndex({state,dispatch}) {
       <Head>
         <title>Dashboard | Tourify</title>
         <meta name="description" content="Dashboard | Tourify" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/favicon.ico" />
       </Head>
         <DashboardLanding data={state}/>
     </>

@@ -7,6 +7,7 @@ import React, {
     useCallback
   } from "react";
   import { reducers } from "./rootReducer";
+  import Cookies from "js-cookie";
   export const RootContext = createContext({});
   
   export const STORAGE_KEY = "rootState";

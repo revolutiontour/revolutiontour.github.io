@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DashboardLayout } from "./shared/Layout";
 import { Select, Form,Input,Button, Row, Col, DatePicker  } from "antd";
 import Link from 'next/link'
 import { currentObject, registObject } from "../../context/object/action";
-import { GetRootContext } from "../../context/context";
+import { GetRootContext, RootContext } from "../../context/context";
 
-React.useLayoutEffect = React.useEffect;
 
 export const TambahObjekWisata = () => {
-  const context = GetRootContext()
+  const context = useContext(RootContext)
   const [state,setstate] = useState({})
   const data = context.state.object.CurrentData
   const {destination,desc,link} = data

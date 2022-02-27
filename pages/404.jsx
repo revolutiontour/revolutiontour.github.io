@@ -8,7 +8,7 @@ export default function Custom404() {
       <Head>
         <title>Create Next App</title>
         <meta name="description" content="Tourify" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/favicon.ico" />
       </Head>
       <DashboardLayout>
           <div className="d-flex flex-column align-self-center justify-content-center h-100">

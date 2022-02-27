@@ -128,7 +128,7 @@ export const DashboardObjekWisata = ({data}) => {
           )}
         />
       :
-      <List404/>
+      <List404 msg="Objek Wisata"/>
       }
       </DashboardLayout>
     </>

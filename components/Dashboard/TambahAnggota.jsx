@@ -4,7 +4,6 @@ import { Select, Form,Input,Button, Row, Col, DatePicker,Radio } from "antd";
 import { registTourLeader, registTourParticipant } from "../../context/member/action";
 import { withContext } from "../../context/context";
 
-React.useLayoutEffect = React.useEffect;
 const TbhAnggota = ({state,dispatch}) => {
   const { Option } = Select;
   const onChange = (value) => {

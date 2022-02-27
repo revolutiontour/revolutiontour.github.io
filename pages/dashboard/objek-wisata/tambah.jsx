@@ -8,7 +8,7 @@ export default function TambahWisata() {
       <Head>
         <title>Tambah Wisata</title>
         <meta name="description" content="Tambah objek wisata" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/favicon.ico" />
       </Head>
         <TambahObjekWisata/>
     </>

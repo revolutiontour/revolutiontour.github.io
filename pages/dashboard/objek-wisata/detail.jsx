@@ -25,7 +25,7 @@ function D2Objek({state,dispatch}){
       <Head>
         <title>Objek Wisata</title>
         <meta name="description" content="Tourify Objek Wisata" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/favicon.ico" />
       </Head>
             <DetailObjek data={list} />
     </>

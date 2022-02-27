@@ -32,7 +32,7 @@ function DashboardIndex({state:RootState,dispatch}) {
       <Head>
         <title>Anggota</title>
         <meta name="description" content="Tourify Anggota" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/favicon.ico" />
       </Head>
         <DashboardAnggota data={nudata} />
     </>

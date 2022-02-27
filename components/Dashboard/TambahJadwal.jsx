@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DashboardLayout } from "./shared/Layout";
-import { Select, Form,Input,Button, Row, Col, DatePicker, Upload } from "antd";
+import { Select, Form,Input,Button, Row, Col, DatePicker, Upload,message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-React.useLayoutEffect = React.useEffect;
 import storage from "./utils/firebase"
 import { registTourSchedule } from "../../context/schedule/action";
-import { GetRootContext } from "../../context/context";
+import { GetRootContext, RootContext } from "../../context/context";
 
 export const TambahJadwal = ({data}) => {
-  const {dispatch} = GetRootContext()
+  const {dispatch} = useContext(RootContext)
   const [state,setstate]= useState(
     {
       downloadurl:null
@@ -50,26 +49,36 @@ export const TambahJadwal = ({data}) => {
       // list["image"] = "";
     } else if (newFile.status === "done") {
       // list["image"] = newFile;
-      const uploadTask = storage.ref(`/schedule/rundown/${newFile.name}`).put(newFile)
-      uploadTask
-      .then(uploadTaskSnapshot => {
-        alert("success")
-        return uploadTaskSnapshot.ref.getDownloadURL();
-      })
-      .then(url  => {
-        
-    setstate(
-      prev => (
-        {
-          ...prev,
-          downloadurl:url
-        }
+      if(newFile.type==="application/pdf"||newFile.type==="image/png"||newFile.type==="image/jpeg"||newFile.type==="text/plain")
+      {
+        const uploadTask = storage.ref(`/schedule/rundown/${newFile.name}`).put(newFile)
+        uploadTask.then(uploadTaskSnapshot => {
+          alert("success")
+          return uploadTaskSnapshot.ref.getDownloadURL();
+        })
+        .then(url  => {
+          
+      setstate(
+        prev => (
+          {
+            ...prev,
+            downloadurl:url
+          }
+        )
       )
-    )
-      }); 
+        }); 
+      }
     }
     // console.log(list)
   };
+
+  const onBeforeUpload = (file) => {
+    const isFile = file.type==="application/pdf"||file.type==="image/png"||file.type==="image/jpeg"||file.type==="text/plain";
+    if (!isFile) {
+      message.error(`cannot upload ${file.name}`);
+    }
+    return isFile || Upload.LIST_IGNORE;
+  }
 
   const dummyRequest = (props) => {
     console.log("dummy req",props)
@@ -94,7 +103,7 @@ export const TambahJadwal = ({data}) => {
     registTourSchedule(formdata)(dispatch)
 
   }
-  console.log("download url :",state.downloadurl)
+  // console.log("download url :",state.downloadurl)
   return (
     <>
       <DashboardLayout>
@@ -144,7 +153,7 @@ export const TambahJadwal = ({data}) => {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-              {data.object.map(({id,name})=>
+              {data.object?.map(({id,name})=>
               <Option value={id}>{name}</Option>)
               }
             </Select>
@@ -166,7 +175,7 @@ export const TambahJadwal = ({data}) => {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-            {data.leader.map(({id,name})=>
+            {data.leader?.map(({id,name})=>
             <Option value={id}>{name}</Option>)
             }
             </Select>
@@ -178,7 +187,9 @@ export const TambahJadwal = ({data}) => {
       >
         <Upload customRequest={dummyRequest}
                 maxCount={1} 
-                onChange={onImageChange}>
+                onChange={onImageChange}
+                beforeUpload={onBeforeUpload}
+                >
     <Button icon={<UploadOutlined />}>Upload</Button>
   </Upload>
       </Form.Item>

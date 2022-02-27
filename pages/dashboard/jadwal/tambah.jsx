@@ -34,7 +34,7 @@ return !loading?
       <Head>
         <title>Tambah Jadwal</title>
         <meta name="description" content="Tourify Tambah jadwal" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/favicon.ico" />
       </Head>
         <TambahJadwal data={data}/>
     </>

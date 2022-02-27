@@ -23,11 +23,10 @@ import {
   TeamOutlined
 } from "@ant-design/icons";
 import { DashboardLayout } from "./shared/Layout";
-import { GetRootContext } from "../../context/context";
-React.useLayoutEffect = React.useEffect;
+import { GetRootContext, RootContext } from "../../context/context";
 
 export const DashboardLanding = () => {
-  const {state:globalState,dispatch}= GetRootContext()
+  const {state:globalState,dispatch}= useContext(RootContext)
   const [state, setstate] = useState({
     openForm: false,
     edit: false,
@@ -68,7 +67,7 @@ export const DashboardLanding = () => {
               >
                 <div className="row">
                   <div className="col-12">
-                    <h1 className="text-white">{globalState.member?.participant?.length}</h1>
+                    <h1 className="text-white">{globalState.member?.participant?.length||0}</h1>
                     <h6 className="text-white">Partisipan bergabung</h6>
                   </div>
                 </div>
@@ -84,7 +83,7 @@ export const DashboardLanding = () => {
               >
               <div className="row">
                 <div className="col-12">
-                  <h1 className="text-white">{globalState.schedule?.sAll?.length}</h1>
+                  <h1 className="text-white">{globalState.schedule?.sAll?.length||0}</h1>
                   <h6 className="text-white">Jadwal perjalanan</h6>
                 </div>
               </div>
@@ -100,7 +99,7 @@ export const DashboardLanding = () => {
               >
               <div className="row">
                 <div className="col-12">
-                  <h1 className="text-white">{globalState.object?.oAll?.length}</h1>
+                  <h1 className="text-white">{globalState.object?.oAll?.length||0}</h1>
                   <h6 className="text-white">Objek Destinasi</h6>
                 </div>
               </div>
@@ -131,7 +130,8 @@ export const DashboardLanding = () => {
                       </div>
                     </div>
                   </Card.Grid>
-                ))}
+                ))||
+                <>Data tidak tersedia</>}
               </Card>
             </Col>
             <Col xs={12} md={6} className="mb-3 mb-md-0">
@@ -142,9 +142,10 @@ export const DashboardLanding = () => {
                     <p>
                       {desc}
                     </p>
-                    <p>Link : www.gunungsalak.com</p>
+                    {/* <p>Link : www.gunungsalak.com</p> */}
                   </Card.Grid>
-                ))}
+                ))||
+                <>Data tidak tersedia</>}
               </Card>
             </Col>
           </Row>

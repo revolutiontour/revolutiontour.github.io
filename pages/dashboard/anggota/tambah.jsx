@@ -8,7 +8,7 @@ export default function DashboardIndex() {
       <Head>
         <title>Tambah Anggota</title>
         <meta name="description" content="Tourify Tambah anggota" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/api/admin/favicon.ico" />
       </Head>
         <TambahAnggota />
     </>

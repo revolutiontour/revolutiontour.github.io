@@ -29,8 +29,6 @@ import RightMenu from "./RightMenu";
 import Head from "next/head";
 import { GetRootContext } from "../../../context/context";
 
-React.useLayoutEffect = React.useEffect;
-
 export const DashboardLayout = ({ children }) => {
   const { push } = useRouter();
   const {state:{member}} = GetRootContext()

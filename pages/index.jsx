@@ -82,7 +82,7 @@ useEffect(() => {
           <Col
             xs="12"
             md="4"
-            className="my-5 my-md-0 mr-md-5 align-self-center"
+            className="my-5 my-md-0 mr-md-4 align-self-center"
           >
             <h4 className="text-orange font-weight-bold">
               Apa yang kami sediakan?
@@ -93,7 +93,7 @@ useEffect(() => {
           <Col
             xs="12"
             md="2"
-            className="my-5 my-md-0 mx-md-4 align-self-center"
+            className="my-5 my-md-0 mx-md-3 align-self-center"
           >
             <p className="text-left">
               <GreenGlobe />
@@ -104,7 +104,7 @@ useEffect(() => {
           <Col
             xs="12"
             md="2"
-            className="my-5 my-md-0 mx-md-4 align-self-center"
+            className="my-5 my-md-0 mx-md-3 align-self-center"
           >
             <p className="text-left">
               <PencarianPeserta />
@@ -115,7 +115,7 @@ useEffect(() => {
           <Col
             xs="12"
             md="2"
-            className="my-5 my-md-0 mx-md-4 align-self-center"
+            className="my-5 my-md-0 mx-md-3 align-self-center"
           >
             <p className="text-left">
               <IconHP />
