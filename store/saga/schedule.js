@@ -14,6 +14,12 @@ const modalFailed = (msg) => {
     });
 };
 
+const modalWarning = (msg) => {
+    notification['warning']({
+        message: msg,
+        description: 'schedule tidak tersedia',
+    });
+};
 
 const modalSuccessRegis = () => {
     notification['success']({
@@ -33,8 +39,14 @@ function* listScheduleSaga() {
                 // Router.push({
                 //     pathname: '/dashboard',
                 // });
-            } else {
-                modalFailed('error',user.responseMessage);
+            }
+            else if(schedule.responseMessage==="DATA NOT EXIST"){
+                // modalWarning(schedule.responseMessage);
+                yield put(listScheduleSuccess(null));
+            }
+            else {
+                console.log(schedule)
+                modalFailed(schedule.responseMessage);
             }
         }
     } catch (err) {

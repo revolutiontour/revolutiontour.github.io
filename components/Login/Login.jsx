@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { Form, Input, Button, Radio } from "antd";
 import { useRouter } from "next/router";
-import { useSelector, useDispatch } from "react-redux";
-import { loginMember } from "../../store/actions/member";
+// import { useSelector, useDispatch } from "react-redux";
+import { withContext } from "../../context/context";
+// import { loginMember } from "../../store/actions/member";
 import styles from "./Login.module.css";
 import { wrapper } from "../../store";
 import { connect } from "react-redux";
 import Router from "next/router";
 import { TourifyLogo } from "../shared/icons";
 
-const Login = ({member,success}) => {
+const Login = ({dispatch}) => {
   // const member = useSelector(state => state.member)
   const { push } = useRouter();
-  const dispatch = useDispatch();
 
   //memakai useSelector untuk mengambil state dari redux
   // const member = useSelector(state => state.member)
@@ -21,7 +21,7 @@ const Login = ({member,success}) => {
     console.log(values);
     const { username, password } = values;
 
-    dispatch(loginMember(values));
+    loginMember(values)(dispatch);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -134,5 +134,5 @@ const Login = ({member,success}) => {
 
 
 
-export default Login;
+export default withContext(Login);
 // export default connect(state => state)(Login);

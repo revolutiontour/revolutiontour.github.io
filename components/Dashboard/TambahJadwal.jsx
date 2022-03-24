@@ -144,7 +144,7 @@ export const TambahJadwal = ({data}) => {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-              {data.object.map(({id,name})=>
+              {data.object?.map(({id,name})=>
               <Option value={id}>{name}</Option>)
               }
             </Select>
@@ -166,7 +166,7 @@ export const TambahJadwal = ({data}) => {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-            {data.leader.map(({id,name})=>
+            {data.leader?.map(({id,name})=>
             <Option value={id}>{name}</Option>)
             }
             </Select>

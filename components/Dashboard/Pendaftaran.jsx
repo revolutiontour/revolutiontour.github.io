@@ -58,7 +58,7 @@ export const DashboardPendaftaran = ({data}) => {
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
-            {schedule.map(({id,title})=>
+            {schedule?.map(({id,title})=>
             <Option value={id}>{title}</Option>
             )}
           </Select>
@@ -80,7 +80,7 @@ export const DashboardPendaftaran = ({data}) => {
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-              {participant.map(({id,name})=>
+              {participant?.map(({id,name})=>
               <Option value={id}>{name}</Option>
               )}
             </Select>

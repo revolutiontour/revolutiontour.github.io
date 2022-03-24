@@ -70,7 +70,7 @@ export const DashboardLanding = () => {
               >
                 <div className="row">
                   <div className="col-12">
-                    <h1 className="text-white">{globalState.member?.participant?.length}</h1>
+                    <h1 className="text-white">{globalState.member?.participant?.length||0}</h1>
                     <h6 className="text-white">Partisipan bergabung</h6>
                   </div>
                 </div>
@@ -86,7 +86,7 @@ export const DashboardLanding = () => {
               >
               <div className="row">
                 <div className="col-12">
-                  <h1 className="text-white">{globalState.schedule?.sAll?.length}</h1>
+                  <h1 className="text-white">{globalState.schedule?.sAll?.length||0}</h1>
                   <h6 className="text-white">Jadwal perjalanan</h6>
                 </div>
               </div>
@@ -102,7 +102,7 @@ export const DashboardLanding = () => {
               >
               <div className="row">
                 <div className="col-12">
-                  <h1 className="text-white">{globalState.object?.oAll?.length}</h1>
+                  <h1 className="text-white">{globalState.object?.oAll?.length||0}</h1>
                   <h6 className="text-white">Objek Destinasi</h6>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export const DashboardLanding = () => {
           <Row>
             <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Card className="shadow-sm rounded-lg" title="Jadwal Terdekat">
-                {topFiveSchedule.map(({title,destination,startDate,endDate}, i) => (
+                {topFiveSchedule?.map(({title,destination,startDate,endDate}, i) => (
                   <Card.Grid hoverable={false} style={gridStyle}>
                     <h6>{title}</h6>
                     <p>Destinasi : {destination}</p>
@@ -133,12 +133,13 @@ export const DashboardLanding = () => {
                       </div>
                     </div>
                   </Card.Grid>
-                ))}
+                ))||
+                <>Data tidak tersedia</>}
               </Card>
             </Col>
             <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Card className="shadow-sm rounded-lg" title="Objek Destinasi">
-                {topFiveObject.map(({name,desc}, i) => (
+                {topFiveObject?.map(({name,desc}, i) => (
                   <Card.Grid hoverable={false} style={gridStyle}>
                     <h6>{name}</h6>
                     <p>
@@ -146,7 +147,8 @@ export const DashboardLanding = () => {
                     </p>
                     <p>Link : www.gunungsalak.com</p>
                   </Card.Grid>
-                ))}
+                ))||
+                <>Data tidak tersedia</>}
               </Card>
             </Col>
           </Row>

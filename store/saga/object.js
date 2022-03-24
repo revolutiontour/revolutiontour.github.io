@@ -21,17 +21,17 @@ const modalSuccessRegis = (type) => {
     });
 };
 
-const modalWarning = (type) => {
-    notification[type]({
-        message: 'Good bye!',
-        description: 'Your account has been logged out!',
+const modalWarning = (msg) => {
+    notification['warning']({
+        message: msg,
+        description: 'Objek wisata tidak tersedia',
     });
 };
 
-const modalFailed = (type) => {
-    notification[type]({
-        message: 'Gagal',
-        description: 'Gagal mendapatkan detail objek',
+const modalFailed = (msg) => {
+    notification['error']({
+        message: msg,
+        description: 'Gagal mendapatkan objek detail wisata',
     });
 };
 
@@ -89,6 +89,14 @@ function* getObjectSaga(){
         if(getObject.responseMessage=="SUCCESS"){
             yield put(listObjectSuccess(getObject.data));
         }
+        else if(getObject.responseMessage==="DATA NOT EXIST"){
+            // modalWarning(getObject.responseMessage);
+            yield put(listObjectSuccess(null));
+        }
+        else {
+            console.log(getObject)
+            modalFailed(getObject.responseMessage);
+        }
     }catch(error){
         console.log(error);
     }
@@ -128,12 +136,12 @@ function* detailObjectSaga({payload}) {
     try {
         const detail = yield call(objectRepository.getDetailObjekWisata,payload);
         if (!detail) {
-            modalFailed('error','');
+            modalFailed('');
         } else {
             if (detail.responseMessage==="SUCCESS") {
                 yield put(detailObjectSuccess(detail.data));
             } else {
-                modalFailed('error',detail.responseMessage);
+                modalFailed(detail.responseMessage);
                 Router.push({
                     pathname: '/dashboard/objek-wisata',
                 });

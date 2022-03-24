@@ -13,22 +13,26 @@ import { useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 // import 'leaflet/dist/leaflet.css'
 import { Provider } from "react-redux";
+import Context from "../context/context"
 
 function MyApp({ Component, pageProps }) {
   const store = useStore((state) => state);
   /*  !![NOTICE] REMOVE THIS IF YOU WANT TO DEBUG ON DEV!! */
   console.log = console.warn = console.error = () => {};
   /*  !![END OF NOTICE] REMOVE THIS IF YOU WANT TO DEBUG ON DEV!! */
-  return process.browser ? (
-    <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
-      <Component {...pageProps} />
-    </PersistGate>
-  ) : (
-    <PersistGate persistor={store}>
-      <Component {...pageProps} />
-    </PersistGate>
-  );
+
+  return <Context><Component {...pageProps} /></Context>
+
+  // return process.browser ? (
+  //   <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
+  //     <Component {...pageProps} />
+  //   </PersistGate>
+  // ) : (
+  //   <PersistGate persistor={store}>
+  //     <Component {...pageProps} />
+  //   </PersistGate>
+  // );
 }
 
-export default wrapper.withRedux(MyApp)
+export default MyApp
 

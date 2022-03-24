@@ -51,7 +51,7 @@ export const DashboardAnggota = ({data}) => {
     filtered: null,
     role:"participant",
     // thedata:[]
-    thedata:data.length>0?data.filter((user)=>user.role==='participant'&&user):[]
+    thedata:data?.length>0?data.filter((user)=>user.role==='participant'&&user):[]
   });
   const filterData = (value) => {
       let{thedata} = state
@@ -165,7 +165,7 @@ export const DashboardAnggota = ({data}) => {
           )}
         />
         :
-        <List404/>
+        <List404 msg="Anggota"/>
         }
       </DashboardLayout>
     </>

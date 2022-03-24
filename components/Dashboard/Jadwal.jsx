@@ -115,7 +115,7 @@ export const DashboardJadwal = (props) => {
             </div>
           </div>
         </Form>
-        {data.length > 0 ? 
+        {data?.length > 0 ? 
         <List
           itemLayout="horizontal"
           size="large"
@@ -165,7 +165,7 @@ export const DashboardJadwal = (props) => {
         />
         :
         
-      <List404/>
+        <List404 msg="Jadwal Tour"/>
         }
       </DashboardLayout>
     </>

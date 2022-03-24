@@ -9,7 +9,7 @@ module.exports = {
     // reactStrictMode: true,
     // tourify:'http://localhost:3000/api',
     // assetPrefix:'/admin',
-    
+    swcMinify: false,
   trailingSlash: true,
   basePath: '/api/admin',
   async rewrites() {

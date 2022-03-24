@@ -23,10 +23,10 @@ const modalSuccessRegis = (type) => {
     });
 };
 
-const modalWarning = (type) => {
-    notification[type]({
-        message: 'Good bye!',
-        description: 'Your account has been logged out!',
+const modalWarning = (msg) => {
+    notification['warning']({
+        message: msg,
+        description: 'Data tour tidak tersedia',
     });
 };
 
@@ -157,6 +157,10 @@ function* getTPSaga(){
         if(getTP.responseMessage=="SUCCESS"){
             yield put(listParticipantSuccess(getTP.data));
         }
+        else if(getTP.responseMessage==="DATA NOT EXIST"){
+            // modalWarning(getTP.responseMessage);
+            yield put(listParticipantSuccess(null));
+        }
     }catch(error){
         console.log(error);
     }
@@ -167,6 +171,10 @@ function* getTLSaga(){
         const getTL = yield call(memberRepository.getTourLeader)
         if(getTL.responseMessage=="SUCCESS"){
             yield put(listLeaderSuccess(getTL.data))
+        }
+        else if(getTL.responseMessage==="DATA NOT EXIST"){
+            // modalWarning(getTL.responseMessage);
+            yield put(listLeaderSuccess(null));
         }
     }catch(error){
         console.log(error);

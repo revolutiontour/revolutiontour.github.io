@@ -6,7 +6,7 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <title>Create Next App</title>
+        <title>Tourify</title>
         <meta name="description" content="Tourify" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

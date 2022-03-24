@@ -24,7 +24,7 @@ export const DashboardObjekWisata = ({data}) => {
 
   const [state, setstate] = useState({
     filtered: null,
-    thedata: data.length>0?data:[]
+    thedata: data?.length>0?data:[]
   });
   const filterData = (value) => {
     var { thedata } = state;
@@ -128,7 +128,8 @@ export const DashboardObjekWisata = ({data}) => {
           )}
         />
       :
-      <List404/>
+      
+      <List404 msg="Objek Wisata"/>
       }
       </DashboardLayout>
     </>
